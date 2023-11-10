@@ -13,17 +13,8 @@ public enum EventBadge {
         this.minimumAmountToGet = minimumAmountToGet;
     }
 
-    public static EventBadge getFromPurchaseAmount(int purchaseAmount) {
-        if (purchaseAmount >= SANTA_BADGE.minimumAmountToGet) {
-            return SANTA_BADGE;
-        }
-        if (purchaseAmount >= TREE_BADGE.minimumAmountToGet) {
-            return TREE_BADGE;
-        }
-        if (purchaseAmount >= STAR_BADGE.minimumAmountToGet) {
-            return STAR_BADGE;
-        }
-        return null;
+    public int getMinimumAmountToGet() {
+        return minimumAmountToGet;
     }
 
     @Override
