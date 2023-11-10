@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiscountTypesProvider {
+public class AvailableDiscountsProvider {
     public List<DiscountStrategy> provide(final LocalDateTime visitDate, final SelectedMenu selectedMenu) {
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
