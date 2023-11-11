@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiscountProviderByDate {
-    public List<DiscountStrategy> provide(final LocalDateTime visitDate) {
+public record DiscountProviderByDate(LocalDateTime visitDate) {
+    public List<DiscountStrategy> provide() {
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
 
