@@ -35,7 +35,7 @@ public record DiscountInfo(
     }
 
     public int calculateAmountAfterDiscount() {
-        int amountAfterDiscount = calculateAmountBeforeDiscount() - calculateAmountBeforeDiscount();
+        int amountAfterDiscount = calculateAmountBeforeDiscount() - calculateDiscountAmount();
         if (hasFreeChampagne()) {
             return amountAfterDiscount + ONE_CHAMPAGNE_PRICE;
         }
