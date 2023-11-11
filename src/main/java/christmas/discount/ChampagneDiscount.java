@@ -10,7 +10,7 @@ public class ChampagneDiscount implements DiscountStrategy {
     @Override
     public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
         validateDate(date);
-        return ONE_CHAMPAGNE_PRICE;
+        return -ONE_CHAMPAGNE_PRICE;
     }
 
     @Override

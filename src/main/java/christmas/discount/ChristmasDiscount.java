@@ -18,7 +18,7 @@ public class ChristmasDiscount implements DiscountStrategy {
         validateDate(date);
 
         int totalDay = date.getDayOfMonth() - EVENT_START_DATE.getDayOfMonth();
-        return DEFAULT_DISCOUNT_AMOUNT + (DISCOUNT_AMOUNT_PER_DAY * totalDay);
+        return -(DEFAULT_DISCOUNT_AMOUNT + (DISCOUNT_AMOUNT_PER_DAY * totalDay));
     }
 
     @Override

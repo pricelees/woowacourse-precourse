@@ -12,7 +12,7 @@ public class SpecialDiscount implements DiscountStrategy {
     @Override
     public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
         validateDate(date);
-        return DISCOUNT_AMOUNT;
+        return -DISCOUNT_AMOUNT;
     }
 
     @Override

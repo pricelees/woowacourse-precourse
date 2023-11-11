@@ -13,7 +13,7 @@ public class WeekendDiscount implements DiscountStrategy {
     public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
         validateDate(date);
         int totalMainMenuCount = selectedMenu.getMainMenuCounts();
-        return totalMainMenuCount * DISCOUNT_AMOUNT_PER_ONE_MAIN_MENU;
+        return -(totalMainMenuCount * DISCOUNT_AMOUNT_PER_ONE_MAIN_MENU);
     }
 
     @Override

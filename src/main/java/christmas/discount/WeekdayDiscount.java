@@ -13,7 +13,7 @@ public class WeekdayDiscount implements DiscountStrategy {
     public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
         validateDate(date);
         int totalDessertCount = selectedMenu.getDessertCounts();
-        return totalDessertCount * DISCOUNT_AMOUNT_PER_ONE_DESSERT;
+        return -(totalDessertCount * DISCOUNT_AMOUNT_PER_ONE_DESSERT);
     }
 
     @Override
