@@ -1,6 +1,11 @@
-package christmas.discount;
+package christmas.util;
 
 import christmas.constants.time.EventTime;
+import christmas.discount.ChristmasDiscount;
+import christmas.discount.DiscountStrategy;
+import christmas.discount.SpecialDiscount;
+import christmas.discount.WeekdayDiscount;
+import christmas.discount.WeekendDiscount;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
