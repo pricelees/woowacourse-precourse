@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
+    public SelectedMenu {
+        validateMenuAndCount(menuAndCounts);
+    }
+
     public int getTotalAmountBeforeDiscount() {
         return menuAndCounts.keySet()
                 .stream()
@@ -26,6 +30,27 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
                 .filter(menu -> menu.isSameCategory(MenuCategory.MAIN))
                 .mapToInt(menuAndCounts::get)
                 .sum();
+    }
+
+    private void validateMenuAndCount(Map<Menu, Integer> menuAndCounts) {
+        if (isOverMaxMenuCount(menuAndCounts)) {
+            throw new IllegalArgumentException();
+        }
+        if (hasOnlyDrink(menuAndCounts)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean isOverMaxMenuCount(Map<Menu, Integer> menuAndCounts) {
+        return menuAndCounts.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum() > Constants.MAXIMUM_TOTAL_MENU_COUNT;
+    }
+
+    private boolean hasOnlyDrink(Map<Menu, Integer> menuAndCounts) {
+        return menuAndCounts.keySet()
+                .stream()
+                .allMatch(menu -> menu.isSameCategory(MenuCategory.DRINK));
     }
 
     @Override
