@@ -30,8 +30,8 @@ public class DateInputView {
     }
 
     private void validateRange(int day) {
-        if (day < DateInputViewConstants.MIN_DAY_OF_MONTH ||
-                day > DateInputViewConstants.MAX_DAY_OF_MONTH) {
+        if (day < LocalDateTime.MIN.getDayOfMonth() ||
+                day > LocalDateTime.MAX.getDayOfMonth()) {
             throw new IllegalArgumentException(DateInputViewConstants.ERROR_MESSAGE);
         }
     }

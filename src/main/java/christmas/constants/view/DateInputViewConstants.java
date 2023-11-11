@@ -5,6 +5,4 @@ public class DateInputViewConstants {
             "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
     public static final String ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String ONLY_CONTAINS_NUMBER_REGEX = "[0-9]+";
-    public static final int MIN_DAY_OF_MONTH = 1;
-    public static final int MAX_DAY_OF_MONTH = 31;
 }
