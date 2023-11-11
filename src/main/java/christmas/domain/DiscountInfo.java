@@ -1,9 +1,9 @@
 package christmas.domain;
 
 import christmas.constants.Constants;
-import christmas.discount.AvailableDiscountsProvider;
 import christmas.discount.ChampagneDiscount;
 import christmas.discount.DiscountStrategy;
+import christmas.util.DiscountProviderByDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,11 +13,10 @@ public record DiscountInfo(
         List<DiscountStrategy> discountTypes) {
     private static final int MINIMUM_AMOUNT_TO_GET_CHAMPAGNE = 120_000;
     private static final int MINIMUM_AMOUNT_TO_DISCOUNT = 10_000;
-    private static final int ONE_CHAMPAGNE_PRICE = 25_000;
 
     public static DiscountInfo valueOf(LocalDateTime visitTime, SelectedMenu selectedMenu) {
-        AvailableDiscountsProvider provider = new AvailableDiscountsProvider();
-        List<DiscountStrategy> discountTypes = provider.provide(visitTime);
+        DiscountProviderByDate provider = new DiscountProviderByDate(visitTime);
+        List<DiscountStrategy> discountTypes = provider.provide();
 
         if (selectedMenu.getTotalAmountBeforeDiscount() >= MINIMUM_AMOUNT_TO_GET_CHAMPAGNE) {
             discountTypes.add(new ChampagneDiscount());
@@ -26,7 +25,7 @@ public record DiscountInfo(
         return new DiscountInfo(visitTime, selectedMenu, discountTypes);
     }
 
-    public int calculateDiscountAmount() {
+    public int calculateBenefitsAmount() {
         if (selectedMenu.getTotalAmountBeforeDiscount() < MINIMUM_AMOUNT_TO_DISCOUNT) {
             return Constants.ZERO;
         }
@@ -35,16 +34,18 @@ public record DiscountInfo(
                 .sum();
     }
 
-    public int calculateAmountBeforeDiscount() {
-        return selectedMenu.getTotalAmountBeforeDiscount();
+    public int calculateDiscountAmount() {
+        if (selectedMenu.getTotalAmountBeforeDiscount() < MINIMUM_AMOUNT_TO_DISCOUNT) {
+            return Constants.ZERO;
+        }
+        return discountTypes.stream()
+                .filter(discountType -> discountType.getClass() != ChampagneDiscount.class)
+                .mapToInt(discountType -> discountType.getDiscountAmount(visitTime, selectedMenu))
+                .sum();
     }
 
     public int calculateAmountAfterDiscount() {
-        int amountAfterDiscount = calculateAmountBeforeDiscount() - calculateDiscountAmount();
-        if (hasFreeChampagne()) {
-            return amountAfterDiscount + ONE_CHAMPAGNE_PRICE;
-        }
-        return amountAfterDiscount;
+        return selectedMenu().getTotalAmountBeforeDiscount() + calculateDiscountAmount();
     }
 
     public boolean hasFreeChampagne() {
