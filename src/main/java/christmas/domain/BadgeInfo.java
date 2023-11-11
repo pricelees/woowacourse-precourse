@@ -6,15 +6,15 @@ import static christmas.constants.badge.EventBadge.TREE_BADGE;
 
 import christmas.constants.Constants;
 
-public final class BadgeInfo {
-    public String getBadgeName(int purchaseAmount) {
-        if (purchaseAmount >= SANTA_BADGE.getMinimumAmountToGet()) {
+public record BadgeInfo(int amountAfterDiscount) {
+    public String getBadgeName() {
+        if (amountAfterDiscount >= SANTA_BADGE.getMinimumAmountToGet()) {
             return SANTA_BADGE.toString();
         }
-        if (purchaseAmount >= TREE_BADGE.getMinimumAmountToGet()) {
+        if (amountAfterDiscount >= TREE_BADGE.getMinimumAmountToGet()) {
             return TREE_BADGE.toString();
         }
-        if (purchaseAmount >= STAR_BADGE.getMinimumAmountToGet()) {
+        if (amountAfterDiscount >= STAR_BADGE.getMinimumAmountToGet()) {
             return STAR_BADGE.toString();
         }
         return Constants.NONE;
