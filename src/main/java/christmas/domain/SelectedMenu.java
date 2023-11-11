@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.constants.Constants;
+import christmas.constants.domain.DomainErrorMessage;
 import christmas.constants.menu.Menu;
 import christmas.constants.menu.MenuCategory;
 import java.util.Map;
@@ -34,10 +35,10 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
 
     private void validateMenuAndCount(Map<Menu, Integer> menuAndCounts) {
         if (isOverMaxMenuCount(menuAndCounts)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(DomainErrorMessage.OVER_MAX_MENU_COUNT_ERROR.getErrorMessage());
         }
         if (hasOnlyDrink(menuAndCounts)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(DomainErrorMessage.ORDER_ONLY_DRINK_ERROR.getErrorMessage());
         }
     }
 
