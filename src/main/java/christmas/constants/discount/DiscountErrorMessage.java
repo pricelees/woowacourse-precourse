@@ -6,4 +6,5 @@ public class DiscountErrorMessage {
     public static final String NOT_SPECIAL_DAY_ERROR = "[ERROR] 특별 할인이 적용되는 날이 아닙니다.";
     public static final String NOT_WEEKDAY_ERROR = "[ERROR] 해당 이벤트는 평일에만 진행됩니다.";
     public static final String NOT_WEEKEND_ERROR = "[ERROR] 해당 이벤트는 주말에만 진행됩니다.";
+    public static final String CANNOT_RECEIVE_CHAMPAGNE = "[ERROR] 샴페인 증정을 위한 최소 주문금액은 12만원 입니다.";
 }
