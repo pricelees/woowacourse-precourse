@@ -1,14 +1,13 @@
 package christmas.discount;
 
 import christmas.constants.time.EventTime;
-import christmas.domain.SelectedMenu;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AvailableDiscountsProvider {
-    public List<DiscountStrategy> provide(final LocalDateTime visitDate, final SelectedMenu selectedMenu) {
+    public List<DiscountStrategy> provide(final LocalDateTime visitDate) {
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
 
@@ -29,7 +28,6 @@ public class AvailableDiscountsProvider {
         if (isSpecialDay(dayOfMonth)) {
             result.add(new SpecialDiscount());
         }
-        result.add(new ChampagneDiscount());
         return result;
     }
 

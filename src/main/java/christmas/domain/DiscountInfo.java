@@ -2,6 +2,7 @@ package christmas.domain;
 
 import christmas.constants.Constants;
 import christmas.discount.AvailableDiscountsProvider;
+import christmas.discount.ChampagneDiscount;
 import christmas.discount.DiscountStrategy;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +17,11 @@ public record DiscountInfo(
 
     public static DiscountInfo valueOf(LocalDateTime visitTime, SelectedMenu selectedMenu) {
         AvailableDiscountsProvider provider = new AvailableDiscountsProvider();
-        List<DiscountStrategy> discountTypes = provider.provide(visitTime, selectedMenu);
+        List<DiscountStrategy> discountTypes = provider.provide(visitTime);
+
+        if (selectedMenu.getTotalAmountBeforeDiscount() >= MINIMUM_AMOUNT_TO_GET_CHAMPAGNE) {
+            discountTypes.add(new ChampagneDiscount());
+        }
 
         return new DiscountInfo(visitTime, selectedMenu, discountTypes);
     }
