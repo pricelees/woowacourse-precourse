@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
-    private static final String MenuFormat = "%s %d개";
-
     public int getTotalAmountBeforeDiscount() {
         return menuAndCounts.keySet()
                 .stream()
@@ -34,7 +32,9 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
     public String toString() {
         return menuAndCounts.keySet()
                 .stream()
-                .map(menu -> String.format(MenuFormat, menu.toString(), menuAndCounts.get(menu)))
+                .map(menu -> menu.toString()
+                        + Constants.COLON_WITH_SPACE
+                        + menuAndCounts.get(menu))
                 .collect(Collectors.joining(Constants.LINE_SEPARATOR));
     }
 }
