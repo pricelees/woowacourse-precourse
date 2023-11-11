@@ -21,7 +21,7 @@ public class WeekendDiscount implements DiscountStrategy {
         if (EventTime.WEEKENDS.contains(date.getDayOfWeek())) {
             return;
         }
-        throw new IllegalArgumentException(DiscountErrorMessage.NOT_WEEKEND_ERROR);
+        throw new IllegalArgumentException(DiscountErrorMessage.NOT_WEEKEND_ERROR.getErrorMessage());
     }
 
     @Override

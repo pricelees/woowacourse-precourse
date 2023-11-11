@@ -1,5 +1,6 @@
 package christmas.util;
 
+import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
 import christmas.discount.ChristmasDiscount;
 import christmas.discount.DiscountStrategy;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public record DiscountProviderByDate(LocalDateTime visitDate) {
     public List<DiscountStrategy> provide() {
+        validateVisitDate(visitDate);
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
 
@@ -50,5 +52,12 @@ public record DiscountProviderByDate(LocalDateTime visitDate) {
 
     private boolean isSpecialDay(int dayOfMonth) {
         return EventTime.SPECIAL_DISCOUNT_DAYS.contains(dayOfMonth);
+    }
+
+    // 할인 정보를 얻어내는데 '일' 정보만 사용하므로, '년','월'에 대해선 예외 검증 필요
+    private void validateVisitDate(LocalDateTime visitDate) {
+        if (visitDate.getYear() != EventTime.YEAR || visitDate.getMonth() != EventTime.MONTH) {
+            throw new IllegalArgumentException(DiscountErrorMessage.YEAR_AND_MONTH_ERROR.getErrorMessage());
+        }
     }
 }

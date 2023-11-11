@@ -22,7 +22,7 @@ public class WeekdayDiscount implements DiscountStrategy {
         if (EventTime.WEEKDAYS.contains(date.getDayOfWeek())) {
             return;
         }
-        throw new IllegalArgumentException(DiscountErrorMessage.NOT_WEEKDAY_ERROR);
+        throw new IllegalArgumentException(DiscountErrorMessage.NOT_WEEKDAY_ERROR.getErrorMessage());
     }
 
     @Override

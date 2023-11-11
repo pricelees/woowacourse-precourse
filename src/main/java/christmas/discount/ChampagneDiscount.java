@@ -29,6 +29,6 @@ public class ChampagneDiscount implements DiscountStrategy {
         if (customer.canReceiveFreeChampagne()) {
             return;
         }
-        throw new IllegalArgumentException(DiscountErrorMessage.CANNOT_RECEIVE_CHAMPAGNE);
+        throw new IllegalArgumentException(DiscountErrorMessage.CANNOT_RECEIVE_CHAMPAGNE.getErrorMessage());
     }
 }

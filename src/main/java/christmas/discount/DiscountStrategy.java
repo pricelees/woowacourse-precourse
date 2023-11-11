@@ -14,7 +14,7 @@ public interface DiscountStrategy {
 
     default void validateYearAndMonth(LocalDateTime date) {
         if (date.getYear() != EventTime.YEAR || date.getMonth() != EventTime.MONTH) {
-            throw new IllegalArgumentException(DiscountErrorMessage.YEAR_AND_MONTH_ERROR);
+            throw new IllegalArgumentException(DiscountErrorMessage.YEAR_AND_MONTH_ERROR.getErrorMessage());
         }
     }
 }

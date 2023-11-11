@@ -26,7 +26,7 @@ public class ChristmasDiscount implements DiscountStrategy {
     public void validateDate(LocalDateTime date) {
         validateYearAndMonth(date);
         if (date.getDayOfMonth() > EventTime.DAY_OF_MONTH_CHRISTMAS) {
-            throw new IllegalArgumentException(DiscountErrorMessage.NOT_BEFORE_CHRISTMAS_ERROR);
+            throw new IllegalArgumentException(DiscountErrorMessage.NOT_BEFORE_CHRISTMAS_ERROR.getErrorMessage());
         }
     }
 
