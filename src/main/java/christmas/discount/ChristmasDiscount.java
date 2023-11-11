@@ -1,5 +1,6 @@
 package christmas.discount;
 
+import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
 import christmas.domain.SelectedMenu;
 import java.time.LocalDateTime;
@@ -24,7 +25,7 @@ public class ChristmasDiscount implements DiscountStrategy {
     public void validateDate(LocalDateTime date) {
         validateYearAndMonth(date);
         if (date.getDayOfMonth() > EventTime.DAY_OF_MONTH_CHRISTMAS) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(DiscountErrorMessage.NOT_BEFORE_CHRISTMAS_ERROR);
         }
     }
 

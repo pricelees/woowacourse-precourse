@@ -1,5 +1,6 @@
 package christmas.discount;
 
+import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
 import christmas.domain.SelectedMenu;
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class SpecialDiscount implements DiscountStrategy {
         if (EventTime.SPECIAL_DISCOUNT_DAYS.contains(date.getDayOfMonth())) {
             return;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(DiscountErrorMessage.NOT_SPECIAL_DAY_ERROR);
     }
 
     @Override

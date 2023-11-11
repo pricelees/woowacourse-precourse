@@ -1,5 +1,6 @@
 package christmas.discount;
 
+import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
 import christmas.domain.SelectedMenu;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class WeekendDiscount implements DiscountStrategy {
         if (EventTime.WEEKENDS.contains(date.getDayOfWeek())) {
             return;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(DiscountErrorMessage.NOT_WEEKEND_ERROR);
     }
 
     @Override
