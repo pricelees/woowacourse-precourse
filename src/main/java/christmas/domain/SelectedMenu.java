@@ -3,7 +3,6 @@ package christmas.domain;
 import christmas.constants.Constants;
 import christmas.constants.menu.Menu;
 import christmas.constants.menu.MenuCategory;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -18,17 +17,17 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
     }
 
     public int getDessertCounts() {
-        MenuCategory dessert = MenuCategory.DESSERT;
-        return (int) Arrays.stream(Menu.values())
-                .filter(menu -> menu.isSameCategory(dessert))
-                .count();
+        return menuAndCounts.keySet().stream()
+                .filter(menu -> menu.isSameCategory(MenuCategory.DESSERT))
+                .mapToInt(menuAndCounts::get)
+                .sum();
     }
 
     public int getMainMenuCounts() {
-        MenuCategory mainMenu = MenuCategory.MAIN;
-        return (int) Arrays.stream(Menu.values())
-                .filter(menu -> menu.isSameCategory(mainMenu))
-                .count();
+        return menuAndCounts.keySet().stream()
+                .filter(menu -> menu.isSameCategory(MenuCategory.MAIN))
+                .mapToInt(menuAndCounts::get)
+                .sum();
     }
 
     @Override
