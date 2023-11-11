@@ -1,5 +1,6 @@
 package christmas;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.controller.PlannerMainController;
 import christmas.view.inputview.PlannerInputView;
 import christmas.view.outputview.PlannerOutputView;
@@ -15,5 +16,6 @@ public class Application {
         );
 
         plannerMainController.start();
+        Console.close();
     }
 }
