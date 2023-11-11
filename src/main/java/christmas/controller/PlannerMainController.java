@@ -26,8 +26,8 @@ public record PlannerMainController(PlannerInputView plannerInputView, PlannerOu
         plannerOutputView.printAmountBeforeDiscount(wootecoPlanner.showAmountBeforeDiscount());
         plannerOutputView.printFreeMenu(wootecoPlanner.showFreeMenu());
         plannerOutputView.printDiscountDescription(wootecoPlanner.showDiscountDescription());
-        plannerOutputView.printTotalDiscountAmount(wootecoPlanner.showTotalDiscountedAmount());
-        plannerOutputView.printExpectedAmount(wootecoPlanner.showExpectedAmount());
+        plannerOutputView.printTotalDiscountAmount(wootecoPlanner.showTotalBenefitsAmount());
+        plannerOutputView.printExpectedAmount(wootecoPlanner.showExpectedAmountToPay());
         plannerOutputView.printEventBadge(wootecoPlanner.showEventBadge());
     }
 }
