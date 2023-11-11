@@ -9,8 +9,6 @@ import java.util.List;
 public record DiscountInfo(
         Customer customer,
         List<DiscountStrategy> discountTypes) {
-    private static final int MINIMUM_AMOUNT_TO_DISCOUNT = 10_000;
-
     public static DiscountInfo valueOf(Customer customer) {
         DiscountProviderByDate provider = new DiscountProviderByDate(customer.dateToVisit());
         List<DiscountStrategy> discountTypes = provider.provide();

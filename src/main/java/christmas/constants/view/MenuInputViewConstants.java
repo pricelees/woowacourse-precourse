@@ -8,5 +8,4 @@ public class MenuInputViewConstants {
     public static final String ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     public static final String COMMA = ",";
     public static final String DASH = "-";
-    public static final int MAXIMUM_TOTAL_MENU_COUNT = 20;
 }
