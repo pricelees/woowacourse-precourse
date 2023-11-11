@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.constants.menu.Menu;
+import christmas.domain.Customer;
 import christmas.domain.SelectedMenu;
 import christmas.domain.WootecoPlanner;
 import christmas.view.inputview.PlannerInputView;
@@ -10,15 +11,25 @@ import java.util.Map;
 
 public record PlannerMainController(PlannerInputView plannerInputView, PlannerOutputView plannerOutputView) {
     public void start() {
-        plannerOutputView.printWelcomeMessage();
-        LocalDateTime visitDate = plannerInputView.receiveDateToVisit();
-        Map<Menu, Integer> menuToOrder = plannerInputView.receiveMenuToOrder();
-        plannerOutputView.printPreviewMessage(visitDate.getDayOfMonth());
-
-        SelectedMenu selectedMenu = new SelectedMenu(menuToOrder);
-        WootecoPlanner wootecoPlanner = WootecoPlanner.valueOf(visitDate, selectedMenu);
+        Customer customer = escortCustomer();
+        WootecoPlanner wootecoPlanner = WootecoPlanner.valueOf(customer);
 
         printAllInfo(wootecoPlanner);
+    }
+
+    private Customer escortCustomer() {
+        plannerOutputView.printWelcomeMessage();
+        Customer customer = receiveCustomerInfo();
+        plannerOutputView.printPreviewMessage(customer.dayOfMonthToVisit());
+
+        return customer;
+    }
+
+    private Customer receiveCustomerInfo() {
+        LocalDateTime dateToVisit = plannerInputView.receiveDateToVisit();
+        Map<Menu, Integer> menuToOrder = plannerInputView.receiveMenuToOrder();
+
+        return new Customer(dateToVisit, new SelectedMenu(menuToOrder));
     }
 
     private void printAllInfo(WootecoPlanner wootecoPlanner) {
