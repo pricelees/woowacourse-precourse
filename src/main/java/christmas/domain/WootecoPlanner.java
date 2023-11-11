@@ -45,7 +45,7 @@ public record WootecoPlanner(
                 .map(type -> type.getTypeName()
                         + Constants.COLON_WITH_SPACE
                         + PRICE_FORMATTER.format(type.getDiscountAmount(customer)))
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(Constants.LINE_SEPARATOR));
     }
 
     public String showTotalBenefitsAmount() {

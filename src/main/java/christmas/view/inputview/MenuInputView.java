@@ -6,6 +6,7 @@ import static christmas.constants.view.MenuInputViewConstants.COMMA;
 import static christmas.constants.view.MenuInputViewConstants.DASH;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.constants.Constants;
 import christmas.constants.menu.Menu;
 import christmas.constants.menu.MenuCategory;
 import christmas.constants.view.MenuInputViewConstants;
@@ -102,7 +103,7 @@ public class MenuInputView {
     }
 
     private boolean isInvalidTotalMenuCountRange(List<String> menuCount) {
-        return MenuInputViewConstants.MAXIMUM_TOTAL_MENU_COUNT <
+        return Constants.MAXIMUM_TOTAL_MENU_COUNT <
                 menuCount.stream()
                         .mapToInt(Integer::parseInt)
                         .sum();
