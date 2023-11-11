@@ -2,7 +2,7 @@ package christmas.discount;
 
 import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
-import christmas.domain.SelectedMenu;
+import christmas.domain.Customer;
 import java.time.LocalDateTime;
 
 public class ChristmasDiscount implements DiscountStrategy {
@@ -14,10 +14,11 @@ public class ChristmasDiscount implements DiscountStrategy {
     private static final int DISCOUNT_AMOUNT_PER_DAY = 100;
 
     @Override
-    public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
-        validateDate(date);
+    public int getDiscountAmount(Customer customer) {
+        ;
+        validateDate(customer.dateToVisit());
 
-        int totalDay = date.getDayOfMonth() - EVENT_START_DATE.getDayOfMonth();
+        int totalDay = customer.dayOfMonthToVisit() - EVENT_START_DATE.getDayOfMonth();
         return -(DEFAULT_DISCOUNT_AMOUNT + (DISCOUNT_AMOUNT_PER_DAY * totalDay));
     }
 

@@ -2,7 +2,7 @@ package christmas.discount;
 
 import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
-import christmas.domain.SelectedMenu;
+import christmas.domain.Customer;
 import java.time.LocalDateTime;
 
 public class WeekdayDiscount implements DiscountStrategy {
@@ -10,10 +10,10 @@ public class WeekdayDiscount implements DiscountStrategy {
     private static final int DISCOUNT_AMOUNT_PER_ONE_DESSERT = 2023;
 
     @Override
-    public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
-        validateDate(date);
-        int totalDessertCount = selectedMenu.getDessertCounts();
-        return -(totalDessertCount * DISCOUNT_AMOUNT_PER_ONE_DESSERT);
+    public int getDiscountAmount(Customer customer) {
+        validateDate(customer.dateToVisit());
+
+        return -(customer.countDessert() * DISCOUNT_AMOUNT_PER_ONE_DESSERT);
     }
 
     @Override

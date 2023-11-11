@@ -1,6 +1,6 @@
 package christmas.discount;
 
-import christmas.domain.SelectedMenu;
+import christmas.domain.Customer;
 import java.time.LocalDateTime;
 
 public class ChampagneDiscount implements DiscountStrategy {
@@ -8,8 +8,8 @@ public class ChampagneDiscount implements DiscountStrategy {
     private static final int ONE_CHAMPAGNE_PRICE = 25_000;
 
     @Override
-    public int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu) {
-        validateDate(date);
+    public int getDiscountAmount(Customer customer) {
+        validateDate(customer.dateToVisit());
         return -ONE_CHAMPAGNE_PRICE;
     }
 

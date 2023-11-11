@@ -2,11 +2,11 @@ package christmas.discount;
 
 import christmas.constants.discount.DiscountErrorMessage;
 import christmas.constants.time.EventTime;
-import christmas.domain.SelectedMenu;
+import christmas.domain.Customer;
 import java.time.LocalDateTime;
 
 public interface DiscountStrategy {
-    int getDiscountAmount(LocalDateTime date, SelectedMenu selectedMenu);
+    int getDiscountAmount(Customer customer);
 
     void validateDate(LocalDateTime date);
 
