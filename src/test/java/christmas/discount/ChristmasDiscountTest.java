@@ -47,7 +47,7 @@ class ChristmasDiscountTest {
         );
         assertThat(discountStrategy.getDiscountAmount(customer)).isEqualTo(expectedDiscountAmount);
     }
-    
+
     static Stream<Arguments> validDayOfMonthProvider() {
         List<Arguments> argumentsList = new ArrayList<>();
         for (int i = 1; i <= 25; i++) {

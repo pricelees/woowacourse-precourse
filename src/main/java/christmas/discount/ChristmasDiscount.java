@@ -15,7 +15,6 @@ public class ChristmasDiscount implements DiscountStrategy {
 
     @Override
     public int getDiscountAmount(Customer customer) {
-        ;
         validateDate(customer.dateToVisit());
 
         int totalDay = customer.dayOfMonthToVisit() - EVENT_START_DATE.getDayOfMonth();
