@@ -16,23 +16,20 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
     }
 
     public int getTotalAmountBeforeDiscount() {
-        return menuAndCounts.keySet()
-                .stream()
+        return menuAndCounts.keySet().stream()
                 .mapToInt(menu -> menuAndCounts.get(menu) * menu.getPrice())
                 .sum();
     }
 
     public int getDessertCounts() {
-        return menuAndCounts.keySet()
-                .stream()
+        return menuAndCounts.keySet().stream()
                 .filter(menu -> menu.isSameCategory(MenuCategory.DESSERT))
                 .mapToInt(menuAndCounts::get)
                 .sum();
     }
 
     public int getMainMenuCounts() {
-        return menuAndCounts.keySet()
-                .stream()
+        return menuAndCounts.keySet().stream()
                 .filter(menu -> menu.isSameCategory(MenuCategory.MAIN))
                 .mapToInt(menuAndCounts::get)
                 .sum();
@@ -48,8 +45,7 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
     }
 
     private boolean isOverMaxMenuCount(Map<Menu, Integer> menuAndCounts) {
-        return menuAndCounts.values()
-                .stream()
+        return menuAndCounts.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum() > Constants.MAXIMUM_TOTAL_MENU_COUNT;
     }
