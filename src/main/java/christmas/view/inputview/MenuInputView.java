@@ -52,12 +52,15 @@ public class MenuInputView {
         if (isContainsOnlyDrink(menuName)) {
             throw new IllegalArgumentException(MenuInputViewConstants.ERROR_MESSAGE);
         }
-
     }
 
     private boolean isNotExistMenu(List<String> menuName) {
-        return menuName.stream()
-                .anyMatch(Menu::isNotContain);
+        try {
+            menuName.forEach(Menu::findMenuFromKoreanName);
+            return false;
+        } catch (IllegalArgumentException e) {
+            return true;
+        }
     }
 
     private boolean hasDuplicateMenu(List<String> menuName) {

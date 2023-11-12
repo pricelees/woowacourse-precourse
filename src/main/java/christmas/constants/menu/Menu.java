@@ -30,12 +30,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menuName.equals(menu.koreanName))
                 .findFirst()
-                .orElse(null);
-    }
-
-    public static boolean isNotContain(String menuName) {
-        return Arrays.stream(Menu.values())
-                .noneMatch(menu -> menuName.equals(menu.koreanName));
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     public boolean isSameCategory(MenuCategory other) {
