@@ -13,8 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record DiscountProviderByDate(LocalDateTime visitDate) {
-    public List<DiscountStrategy> provide() {
+    public DiscountProviderByDate {
         validateVisitDate(visitDate);
+    }
+
+    public List<DiscountStrategy> provide() {
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
 
