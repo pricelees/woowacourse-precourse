@@ -4,6 +4,8 @@ import christmas.constants.Constants;
 import christmas.discount.ChampagneDiscount;
 import christmas.discount.DiscountStrategy;
 import christmas.util.DiscountProviderByDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public record DiscountInfo(
@@ -14,7 +16,9 @@ public record DiscountInfo(
         List<DiscountStrategy> discountTypes = provider.provide();
 
         if (customer.canReceiveFreeChampagne()) {
-            discountTypes.add(new ChampagneDiscount());
+            List<DiscountStrategy> discountsWithChampagne = new ArrayList<>(discountTypes);
+            discountsWithChampagne.add(new ChampagneDiscount());
+            return new DiscountInfo(customer, Collections.unmodifiableList(discountsWithChampagne));
         }
 
         return new DiscountInfo(customer, discountTypes);

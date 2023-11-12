@@ -10,6 +10,7 @@ import christmas.discount.WeekendDiscount;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public record DiscountProviderByDate(LocalDateTime visitDate) {
@@ -21,7 +22,7 @@ public record DiscountProviderByDate(LocalDateTime visitDate) {
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
 
-        return getAvailableDiscounts(dayOfMonth, dayOfWeek);
+        return Collections.unmodifiableList(getAvailableDiscounts(dayOfMonth, dayOfWeek));
     }
 
     private List<DiscountStrategy> getAvailableDiscounts(int dayOfMonth, DayOfWeek dayOfWeek) {
