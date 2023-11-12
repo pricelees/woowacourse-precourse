@@ -1,6 +1,7 @@
 package christmas.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import christmas.discount.ChristmasDiscount;
@@ -17,15 +18,13 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class DiscountProviderByDateTest {
-    @DisplayName("입력된 일자에 대한 정확한 할인 리스트 반환 확인")
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("provideExpectedDiscountList")
-    void provide(String testName, int dayOfMonthToVisit, List<DiscountStrategy> expectedDiscounts) {
-        LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
-        DiscountProviderByDate provider = new DiscountProviderByDate(dateToVisit);
-
-        assertThat(provider.provide()).extracting(DiscountStrategy::getClass)
-                .isEqualTo(expectedDiscounts);
+    static Stream<Arguments> provideInvalidDate() {
+        return Stream.of(
+                arguments("2023년이 아닌 경우",
+                        LocalDateTime.of(2022, 12, 1, 0, 0)),
+                arguments("12월이 아닌 경우",
+                        LocalDateTime.of(2023, 11, 30, 0, 0))
+        );
     }
 
     static Stream<Arguments> provideExpectedDiscountList() {
@@ -46,5 +45,25 @@ class DiscountProviderByDateTest {
                 arguments("12월 31일 : 평일 할인, 특별 할인",
                         31, List.of(WeekdayDiscount.class, SpecialDiscount.class))
         );
+    }
+
+    @DisplayName("입력된 날짜에 대한 예외 확인")
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("provideInvalidDate")
+    void provide_WithInvalidInput_ThrowsException(String testName, LocalDateTime dateToVisit) {
+        assertThatThrownBy(() -> new DiscountProviderByDate(dateToVisit))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 이벤트는 2023년 12월에만 진행됩니다.");
+    }
+
+    @DisplayName("입력된 일자에 대한 정확한 할인 리스트 반환 확인")
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("provideExpectedDiscountList")
+    void provide(String testName, int dayOfMonthToVisit, List<DiscountStrategy> expectedDiscounts) {
+        LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
+        DiscountProviderByDate provider = new DiscountProviderByDate(dateToVisit);
+
+        assertThat(provider.provide()).extracting(DiscountStrategy::getClass)
+                .isEqualTo(expectedDiscounts);
     }
 }
