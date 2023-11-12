@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
+    private static final String SPACE = " ";
+    private static final String COUNT_TO_KOREAN = "개";
+
     public SelectedMenu {
         validateMenuAndCount(menuAndCounts);
     }
@@ -20,14 +23,16 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
     }
 
     public int getDessertCounts() {
-        return menuAndCounts.keySet().stream()
+        return menuAndCounts.keySet()
+                .stream()
                 .filter(menu -> menu.isSameCategory(MenuCategory.DESSERT))
                 .mapToInt(menuAndCounts::get)
                 .sum();
     }
 
     public int getMainMenuCounts() {
-        return menuAndCounts.keySet().stream()
+        return menuAndCounts.keySet()
+                .stream()
                 .filter(menu -> menu.isSameCategory(MenuCategory.MAIN))
                 .mapToInt(menuAndCounts::get)
                 .sum();
@@ -43,7 +48,8 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
     }
 
     private boolean isOverMaxMenuCount(Map<Menu, Integer> menuAndCounts) {
-        return menuAndCounts.values().stream()
+        return menuAndCounts.values()
+                .stream()
                 .mapToInt(Integer::intValue)
                 .sum() > Constants.MAXIMUM_TOTAL_MENU_COUNT;
     }
@@ -56,11 +62,8 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
 
     @Override
     public String toString() {
-        return menuAndCounts.keySet()
-                .stream()
-                .map(menu -> menu.toString()
-                        + Constants.COLON_WITH_SPACE
-                        + menuAndCounts.get(menu))
+        return menuAndCounts.keySet().stream()
+                .map(menu -> menu.toString() + SPACE + menuAndCounts.get(menu) + COUNT_TO_KOREAN)
                 .collect(Collectors.joining(Constants.LINE_SEPARATOR));
     }
 }
