@@ -11,6 +11,7 @@ import christmas.constants.menu.Menu;
 import christmas.constants.menu.MenuCategory;
 import christmas.constants.view.MenuInputViewConstants;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
@@ -122,6 +123,6 @@ public class MenuInputView {
                     result.put(menu, count);
                 });
 
-        return result;
+        return Collections.unmodifiableMap(result);
     }
 }
