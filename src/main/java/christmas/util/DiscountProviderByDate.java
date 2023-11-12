@@ -22,7 +22,7 @@ public record DiscountProviderByDate(LocalDateTime visitDate) {
         int dayOfMonth = visitDate.getDayOfMonth();
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
 
-        return Collections.unmodifiableList(getAvailableDiscounts(dayOfMonth, dayOfWeek));
+        return getAvailableDiscounts(dayOfMonth, dayOfWeek);
     }
 
     private List<DiscountStrategy> getAvailableDiscounts(int dayOfMonth, DayOfWeek dayOfWeek) {
@@ -39,7 +39,7 @@ public record DiscountProviderByDate(LocalDateTime visitDate) {
         if (isSpecialDay(dayOfMonth)) {
             result.add(new SpecialDiscount());
         }
-        return result;
+        return Collections.unmodifiableList(result);
     }
 
     private boolean isBeforeChristmas(int dayOfMonth) {
