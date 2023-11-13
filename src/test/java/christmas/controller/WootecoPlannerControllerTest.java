@@ -38,6 +38,7 @@ class WootecoPlannerControllerTest extends NsTest {
             runException(
                     "3", // 날짜는 정상적인 값을 입력
                     "", // 입력이 비어있는 경우
+                    "김치찌개-1,시저샐러드-1,타파스-1", // 없는 메뉴를 주문한 경우
                     "양송이수프-1:타파스-1:제로콜라-1", // 구분자가 컴마가 아닌 경우
                     "시저샐러드-a,티본스테이크-1,바비큐립-1", // 갯수가 잘못된 경우
                     "시저샐러드-0,티본스테이크-1,바비큐립-1", // 갯수가 0인 경우
@@ -93,7 +94,7 @@ class WootecoPlannerControllerTest extends NsTest {
     protected void runMain() {
         WootecoPlannerInputView wootecoPlannerInputView = new WootecoPlannerInputView();
         WootecoPlannerOutputView wootecoPlannerOutputView = new WootecoPlannerOutputView();
-        WootecoPlannerController wootecoPlannerController = new WootecoPlannerController(
+        PlannerControllable wootecoPlannerController = new WootecoPlannerController(
                 wootecoPlannerInputView,
                 wootecoPlannerOutputView
         );
