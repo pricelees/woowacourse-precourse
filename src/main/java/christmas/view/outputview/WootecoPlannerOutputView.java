@@ -3,7 +3,7 @@ package christmas.view.outputview;
 import christmas.constants.Constants;
 import christmas.constants.view.OutputViewConstants;
 
-public class PlannerOutputView {
+public class WootecoPlannerOutputView {
     public void printWelcomeMessage() {
         System.out.println(OutputViewConstants.WELCOME_MESSAGE);
     }
