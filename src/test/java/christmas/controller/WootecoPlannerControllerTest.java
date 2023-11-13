@@ -6,8 +6,8 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.test.NsTest;
-import christmas.view.inputview.PlannerInputView;
-import christmas.view.outputview.PlannerOutputView;
+import christmas.view.inputview.WootecoPlannerInputView;
+import christmas.view.outputview.WootecoPlannerOutputView;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -19,7 +19,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class PlannerMainControllerTest extends NsTest {
+class WootecoPlannerControllerTest extends NsTest {
     @DisplayName("방문 날짜에 대한 모든 예외를 발생시키며, 입력을 반복하여 받는지 확인")
     @Test
     void start_WithInvalidVisitDate_CanRetryInput() {
@@ -91,14 +91,14 @@ class PlannerMainControllerTest extends NsTest {
 
     @Override
     protected void runMain() {
-        PlannerInputView plannerInputView = new PlannerInputView();
-        PlannerOutputView plannerOutputView = new PlannerOutputView();
-        PlannerMainController plannerMainController = new PlannerMainController(
-                plannerInputView,
-                plannerOutputView
+        WootecoPlannerInputView wootecoPlannerInputView = new WootecoPlannerInputView();
+        WootecoPlannerOutputView wootecoPlannerOutputView = new WootecoPlannerOutputView();
+        WootecoPlannerController wootecoPlannerController = new WootecoPlannerController(
+                wootecoPlannerInputView,
+                wootecoPlannerOutputView
         );
 
-        plannerMainController.start();
+        wootecoPlannerController.run();
         Console.close();
     }
 }

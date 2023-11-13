@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-class BadgeInfoTest {
+class BadgeContainerTest {
     @DisplayName("할인 후 금액이 음수일 때 예외 발생 확인")
     @Test
     void constructor_WithNegativeAmount_ThrowsException() {
-        assertThatThrownBy(() -> new BadgeInfo(-1))
+        assertThatThrownBy(() -> new BadgeContainer(-1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 할인 후의 금액이 할인 전 금액보다 클 수 없습니다.");
     }
@@ -26,9 +26,9 @@ class BadgeInfoTest {
             "20000 / 산타"
     }, delimiter = '/')
     void getBadgeInfo(int amountAfterDiscount, String expectedBadgeName) {
-        BadgeInfo badgeInfo = new BadgeInfo(amountAfterDiscount);
+        BadgeContainer badgeContainer = new BadgeContainer(amountAfterDiscount);
 
-        assertThat(badgeInfo.getBadgeName())
+        assertThat(badgeContainer.getBadgeName())
                 .isEqualTo(expectedBadgeName);
     }
 }

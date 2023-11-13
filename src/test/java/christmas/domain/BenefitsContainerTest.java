@@ -15,7 +15,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class DiscountInfoTest {
+class BenefitsContainerTest {
     // 모든 메뉴를 1개씩 선택했을 때의 할인 전 금액
     private static final int AMOUNT_BEFORE_DISCOUNT = 296500;
     SelectedMenu selectedMenu;
@@ -37,10 +37,10 @@ class DiscountInfoTest {
     void calculateBenefitsAmount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
         Customer customer = new Customer(dateToVisit, selectedMenu);
-        DiscountInfo discountInfo = DiscountInfo.valueOf(customer);
+        BenefitsContainer benefitsContainer = BenefitsContainer.of(customer);
 
         int expectedBenefitsAmount = expectedAmount.get(0);
-        assertThat(discountInfo.calculateBenefitsAmount()).isEqualTo(expectedBenefitsAmount);
+        assertThat(benefitsContainer.calculateBenefitsAmount()).isEqualTo(expectedBenefitsAmount);
     }
 
     @DisplayName("정확한 실제 할인 금액을 반환하는지 확인")
@@ -49,10 +49,10 @@ class DiscountInfoTest {
     void calculateDiscountAmount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
         Customer customer = new Customer(dateToVisit, selectedMenu);
-        DiscountInfo discountInfo = DiscountInfo.valueOf(customer);
+        BenefitsContainer benefitsContainer = BenefitsContainer.of(customer);
 
         int expectedActualDiscountAmount = expectedAmount.get(1);
-        assertThat(discountInfo.calculateDiscountAmount()).isEqualTo(expectedActualDiscountAmount);
+        assertThat(benefitsContainer.calculateDiscountAmount()).isEqualTo(expectedActualDiscountAmount);
     }
 
     @DisplayName("정확한 할인 후 금액을 반환하는지 확인")
@@ -61,10 +61,10 @@ class DiscountInfoTest {
     void calculateAmountAfterDiscount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
         Customer customer = new Customer(dateToVisit, selectedMenu);
-        DiscountInfo discountInfo = DiscountInfo.valueOf(customer);
+        BenefitsContainer benefitsContainer = BenefitsContainer.of(customer);
 
         int expectedAmountToPay = AMOUNT_BEFORE_DISCOUNT + expectedAmount.get(1);
-        assertThat(discountInfo.calculateAmountAfterDiscount()).isEqualTo(expectedAmountToPay);
+        assertThat(benefitsContainer.calculateAmountAfterDiscount()).isEqualTo(expectedAmountToPay);
     }
 
     static Stream<Arguments> provideDateAndExpectedAmount() {
