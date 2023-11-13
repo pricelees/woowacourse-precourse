@@ -1,9 +1,11 @@
 package christmas.domain;
 
 import christmas.constants.domain.DomainErrorMessage;
+import christmas.constants.menu.Menu;
 import christmas.constants.time.EventTime;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Map;
 
 public record Customer(LocalDateTime dateToVisit, SelectedMenu selectedMenu) {
     private static final int MINIMUM_AMOUNT_TO_GET_CHAMPAGNE = 120_000;
@@ -13,12 +15,16 @@ public record Customer(LocalDateTime dateToVisit, SelectedMenu selectedMenu) {
         validateDate(dateToVisit);
     }
 
+    public Customer(LocalDateTime dateToVisit, Map<Menu, Integer> menuToOrder) {
+        this(dateToVisit, new SelectedMenu(menuToOrder));
+    }
+
     public int dayOfMonthToVisit() {
         return dateToVisit.getDayOfMonth();
     }
 
     public int orderAmount() {
-        return selectedMenu().getTotalAmountBeforeDiscount();
+        return selectedMenu.getTotalAmountBeforeDiscount();
     }
 
     public String orderedMenu() {
