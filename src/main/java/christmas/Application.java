@@ -1,21 +1,14 @@
 package christmas;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.controller.PlannerMainController;
-import christmas.view.inputview.PlannerInputView;
-import christmas.view.outputview.PlannerOutputView;
+import christmas.controller.MainController;
+import christmas.controller.WootecoPlannerController;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        PlannerInputView plannerInputView = new PlannerInputView();
-        PlannerOutputView plannerOutputView = new PlannerOutputView();
-        PlannerMainController plannerMainController = new PlannerMainController(
-                plannerInputView,
-                plannerOutputView
-        );
-
-        plannerMainController.start();
+        MainController mainController = new MainController(new WootecoPlannerController());
+        mainController.run();
         Console.close();
     }
 }
