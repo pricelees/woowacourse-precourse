@@ -3,6 +3,7 @@ package christmas.view.inputview;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.constants.time.EventTime;
 import christmas.constants.view.DateInputViewConstants;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
 public class DateInputView {
@@ -11,12 +12,13 @@ public class DateInputView {
         String input = Console.readLine();
         validateDateFormat(input);
 
-        int day = Integer.parseInt(input);
-        validateRange(day);
-
-        return LocalDateTime.of(
-                EventTime.YEAR, EventTime.MONTH, day,
-                EventTime.HOUR, EventTime.MINUTE, EventTime.SECOND);
+        try {
+            return LocalDateTime.of(
+                    EventTime.YEAR, EventTime.MONTH, Integer.parseInt(input),
+                    EventTime.HOUR, EventTime.MINUTE, EventTime.SECOND);
+        } catch (DateTimeException e) {
+            throw new IllegalArgumentException(DateInputViewConstants.ERROR_MESSAGE);
+        }
     }
 
     private void validateDateFormat(String input) {
@@ -27,12 +29,5 @@ public class DateInputView {
 
     private boolean isInvalidFormat(String input) {
         return !input.matches(DateInputViewConstants.ONLY_CONTAINS_NUMBER_REGEX);
-    }
-
-    private void validateRange(int day) {
-        if (day < LocalDateTime.MIN.getDayOfMonth() ||
-                day > LocalDateTime.MAX.getDayOfMonth()) {
-            throw new IllegalArgumentException(DateInputViewConstants.ERROR_MESSAGE);
-        }
     }
 }
