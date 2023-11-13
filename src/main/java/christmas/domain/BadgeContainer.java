@@ -7,8 +7,8 @@ import static christmas.constants.badge.EventBadge.TREE_BADGE;
 import christmas.constants.Constants;
 import christmas.constants.domain.DomainErrorMessage;
 
-public record BadgeInfo(int amountAfterDiscount) {
-    public BadgeInfo {
+public record BadgeContainer(int amountAfterDiscount) {
+    public BadgeContainer {
         validateAmount(amountAfterDiscount);
     }
 
