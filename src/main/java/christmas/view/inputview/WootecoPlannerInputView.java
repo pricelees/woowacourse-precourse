@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class PlannerInputView {
+public class WootecoPlannerInputView {
     private <T> T retryInputOnException(final Supplier<T> supplier) {
         try {
             return supplier.get();
