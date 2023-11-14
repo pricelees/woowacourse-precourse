@@ -21,7 +21,7 @@ class SpecialDiscountTest {
     @DisplayName("특별 할인에 해당되지 않는 모든 일의 할인 금액이 0원인지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideNotSpecialDay")
-    void getDiscountAmount_WithNotSpecialDay_ThorwsException(int dayOfMonthToVisit) {
+    void getDiscountAmount_WithNotSpecialDay_ThrowsException(int dayOfMonthToVisit) {
         Customer customer = new Customer(
                 LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0, 0),
                 menuToOrder
@@ -35,7 +35,7 @@ class SpecialDiscountTest {
     @DisplayName("특별 할인에 해당되는 모든 일의 할인 금액이 1000원인지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideSpecialDay")
-    void getDiscountAmount_WithSpecialDay_(int dayOfMonthToVisit) {
+    void getDiscountAmount_WithSpecialDay(int dayOfMonthToVisit) {
         Customer customer = new Customer(
                 LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0, 0),
                 menuToOrder

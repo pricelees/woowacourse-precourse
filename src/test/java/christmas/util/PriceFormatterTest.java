@@ -13,7 +13,7 @@ class PriceFormatterTest {
     @DisplayName("1원부터 10억까지 모든 단위의 숫자를 정확히 파싱하는지 확인")
     @ParameterizedTest
     @MethodSource("provideArguments")
-    void format(int amount, String expectedResult) {
+    void format_WithVariousUnit(int amount, String expectedResult) {
         assertThat(PriceFormatter.format(amount))
                 .isEqualTo(expectedResult);
     }

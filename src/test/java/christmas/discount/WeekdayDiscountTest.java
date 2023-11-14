@@ -35,7 +35,7 @@ class WeekdayDiscountTest {
     @DisplayName("평일 방문 고객의 할인 금액을 정확히 계산하는지 확인")
     @ParameterizedTest(name = "{0}")
     @MethodSource("provideValidArgument")
-    void getDiscountAmount_WithValidInput(
+    void getDiscountAmount_WithWeekday(
             String testName,
             LocalDateTime dateToVisit,
             Map<Menu, Integer> menuToOrder

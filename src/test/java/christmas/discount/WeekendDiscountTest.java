@@ -20,8 +20,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 class WeekendDiscountTest {
     @DisplayName("평일 방문 고객의 할인 금액이 0원인지 확인")
     @ParameterizedTest(name = "12월 {0}일")
-    @MethodSource("provideWeekend")
-    void getDiscountAmount_WithWeekend_ThrowsException(int dayOfMonth) {
+    @MethodSource("provideWeekday")
+    void getDiscountAmount_WithWeekday_ThrowsException(int dayOfMonth) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonth, 0, 0);
         // 메뉴는 테스트와 무관하므로 임의 설정
         Map<Menu, Integer> menuToOrder = Map.of(Menu.TAPAS, 1, Menu.CHRISTMAS_PASTA, 1);
@@ -35,7 +35,7 @@ class WeekendDiscountTest {
     @DisplayName("정상적인 입력에 대한 정확한 할인 금액 반환 확인")
     @ParameterizedTest(name = "{0}")
     @MethodSource("provideValidArgument")
-    void getDiscountAmount_WithValidInput(
+    void getDiscountAmount_WithWeekend(
             String testName,
             LocalDateTime dateToVisit,
             SelectedMenu selectedMenu
@@ -49,7 +49,7 @@ class WeekendDiscountTest {
                 .isEqualTo(expectedDiscountAmount);
     }
 
-    static Stream<Arguments> provideWeekend() {
+    static Stream<Arguments> provideWeekday() {
         return IntStream.rangeClosed(1, 31)
                 .mapToObj(day -> LocalDateTime.of(2023, 12, day, 0, 0, 0))
                 .filter(day -> EventTime.WEEKDAYS.contains(day.getDayOfWeek()))

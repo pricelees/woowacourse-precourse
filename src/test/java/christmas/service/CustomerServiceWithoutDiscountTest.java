@@ -27,31 +27,31 @@ class CustomerServiceWithoutDiscountTest {
 
     @DisplayName("이벤트 참여가 불가능할 때, 증정 메뉴 내역 출력 확인")
     @Test
-    void showFreeMenu() {
+    void showFreeMenu_CantParticipateEvent() {
         assertThat(customerService.showFreeMenu()).isEqualTo("없음");
     }
 
     @DisplayName("이벤트 참여가 불가능할 때, 할인 내역 출력 확인")
     @Test
-    void showDiscountDescription() {
+    void showDiscountDescription_CantParticipateEven() {
         assertThat(customerService.showDiscountDescription()).isEqualTo("없음");
     }
 
     @DisplayName("이벤트 참여가 불가능할 때, 할인 내역 출력 확인")
     @Test
-    void showEventBadge() {
+    void showEventBadge_CantParticipateEven() {
         assertThat(customerService.showEventBadge()).isEqualTo("없음");
     }
 
     @DisplayName("이벤트 참여가 불가능할 때, 총 혜택 금액 출력 확인")
     @Test
-    void showTotalBenefitsAmount() {
+    void showTotalBenefitsAmount_CantParticipateEven() {
         assertThat(customerService.showTotalBenefitsAmount()).isEqualTo("0원");
     }
 
     @DisplayName("이벤트 참여가 불가능할 때, 예상 금액 출력 확인")
     @Test
-    void showExpectedAmountToPay() {
+    void showExpectedAmountToPay_CantParticipateEven() {
         assertThat(customerService.showExpectedAmountToPay()).isEqualTo("8,500원");
     }
 }

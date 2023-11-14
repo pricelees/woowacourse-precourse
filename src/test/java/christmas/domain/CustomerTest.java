@@ -19,6 +19,7 @@ class CustomerTest {
 
     @BeforeEach
     void setUp() {
+        // 일, 시간, 분은 예외 테스트와 무관하므로, 범위에 맞게 랜덤하게 지정
         int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
         int randomHour = Randoms.pickNumberInRange(0, 24);
         int randomMinute = Randoms.pickNumberInRange(0, 60);

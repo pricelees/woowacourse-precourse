@@ -14,7 +14,7 @@ class CustomerServiceTest {
      */
     @DisplayName("1만원 미만 주문금액일 때 주문 메뉴 출력 확인")
     @Test
-    void showOrderedMenu() {
+    void showOrderedMenu_WithCannotParticipateEvent() {
         CustomerService customerService = CustomerServiceFinder.find(
                 LocalDateTime.of(2023, 12, 25, 0, 0),
                 Map.of(Menu.MUSHROOM_SOUP, 1, Menu.ZERO_COKE, 1)
@@ -26,7 +26,7 @@ class CustomerServiceTest {
 
     @DisplayName("1만원 이상 주문금액일 때 주문 메뉴 출력 확인")
     @Test
-    void showOrderedMenu_With() {
+    void showOrderedMenu_WithCanParticipateEvent() {
         CustomerService customerService = CustomerServiceFinder.find(
                 LocalDateTime.of(2023, 12, 25, 0, 0),
                 Map.of(Menu.CAESAR_SALAD, 1, Menu.T_BONE_STEAK, 1,

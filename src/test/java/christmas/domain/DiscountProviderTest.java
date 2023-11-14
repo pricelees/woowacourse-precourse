@@ -32,7 +32,7 @@ class DiscountProviderTest {
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 '혜택' 금액을 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedAmount")
-    void calculateBenefitsAmount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
+    void calculateBenefitsAmount_WithAllMenu(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
@@ -43,7 +43,7 @@ class DiscountProviderTest {
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 실제 할인 금액을 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedAmount")
-    void calculateDiscountAmount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
+    void calculateDiscountAmount_WithAllMenu(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
@@ -54,7 +54,7 @@ class DiscountProviderTest {
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 할인 내역을 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedDescription")
-    void getDiscountDescription(int dayOfMonthToVisit, String[] expectedDiscounts) {
+    void getDiscountDescription_WithAllMenu(int dayOfMonthToVisit, String[] expectedDiscounts) {
         DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 

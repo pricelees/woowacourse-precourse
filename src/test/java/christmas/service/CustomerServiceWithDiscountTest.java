@@ -33,7 +33,7 @@ class CustomerServiceWithDiscountTest {
 
     @DisplayName("모든 메뉴를 1개씩 주문했을 때, 증정 메뉴 내역을 정확히 반환하는지 확인")
     @Test
-    void showFreeMenu() {
+    void showFreeMenu_WithAllMenu() {
         // 증정 메뉴는 금액으로 결정되기에, 1일부터 31일까지 무작위 선택
         int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
         Customer customer = new Customer(
@@ -49,7 +49,7 @@ class CustomerServiceWithDiscountTest {
     @DisplayName("모든 메뉴를 1개씩 주문했을 때, 할인 내역을 정확히 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideDiscountDescription")
-    void showDiscountDescription(int dayOfMonthToVisit, String[] expectedDiscountDescription) {
+    void showDiscountDescription_WithAllMenu(int dayOfMonthToVisit, String[] expectedDiscountDescription) {
         Customer customer = new Customer(
                 LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0),
                 menuToOrder
@@ -62,7 +62,7 @@ class CustomerServiceWithDiscountTest {
     @DisplayName("모든 메뉴를 1개씩 주문했을 때, 총 혜택 금액을 정확히 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedAmount")
-    void showTotalBenefitsAmount(int dayOfMonthToVisit, List<String> expectedAmounts) {
+    void showTotalBenefitsAmount_WithAllMenu(int dayOfMonthToVisit, List<String> expectedAmounts) {
         Customer customer = new Customer(
                 LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0),
                 menuToOrder
@@ -76,7 +76,7 @@ class CustomerServiceWithDiscountTest {
     @DisplayName("모든 메뉴를 1개씩 주문했을 때, 예상 결제 금액을 정확히 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedAmount")
-    void showExpectedAmountToPay(int dayOfMonthToVisit, List<String> expectedAmounts) {
+    void showExpectedAmountToPay_WithAllMenu(int dayOfMonthToVisit, List<String> expectedAmounts) {
         Customer customer = new Customer(
                 LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0),
                 menuToOrder
@@ -89,7 +89,7 @@ class CustomerServiceWithDiscountTest {
 
     @DisplayName("모든 메뉴를 1개씩 주문 했을 때, 증정될 배지를 정확히 반환하는지 확인")
     @Test
-    void showEventBadge() {
+    void showEventBadge_WithAllMenu() {
         // 증정 메뉴는 금액으로 결정되기에, 1일부터 31일까지 무작위 선택
         int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
         Customer customer = new Customer(

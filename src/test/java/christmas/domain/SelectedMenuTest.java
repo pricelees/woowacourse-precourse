@@ -39,7 +39,7 @@ class SelectedMenuTest {
 
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 총계를 계산하는지 확인")
     @Test
-    void getTotalAmountBeforeDiscount() {
+    void getTotalAmountBeforeDiscount_WithAllMenu() {
         int expectedAmount = Arrays.stream(Menu.values())
                 .mapToInt(Menu::getPrice)
                 .sum();
@@ -50,7 +50,7 @@ class SelectedMenuTest {
 
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 디저트 메뉴의 개수를 계산하는지 확인")
     @Test
-    void getDessertCounts() {
+    void getDessertCounts_WithAllMenu() {
         int expectedDessertCount = 2;
         assertThat(selectedMenu.getDessertCounts())
                 .isEqualTo(expectedDessertCount);
@@ -58,7 +58,7 @@ class SelectedMenuTest {
 
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 메인 메뉴의 개수를 계산하는지 확인")
     @Test
-    void getMainMenuCounts() {
+    void getMainMenuCounts_WithAllMenu() {
         int expectedMainCount = 4;
         assertThat(selectedMenu.getMainMenuCounts())
                 .isEqualTo(expectedMainCount);
@@ -66,7 +66,7 @@ class SelectedMenuTest {
 
     @DisplayName("모든 메뉴를 1개씩 선택했을 때, 메뉴 리스트를 정확히 반환하는지 확인")
     @Test
-    void toString_WithAllMenus() {
+    void toString_WithAllMenu() {
         String[] expected = {"양송이수프 1개", "타파스 1개", "시저샐러드 1개",
                 "티본스테이크 1개", "바비큐립 1개", "해산물파스타 1개", "크리스마스파스타 1개",
                 "초코케이크 1개", "아이스크림 1개",
