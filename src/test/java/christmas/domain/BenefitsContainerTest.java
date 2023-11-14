@@ -31,45 +31,57 @@ class BenefitsContainerTest {
     }
 
 
-    @DisplayName("정확한 '혜택' 금액을 반환하는지 확인")
+    @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 '혜택' 금액을 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
-    @MethodSource("provideDateAndExpectedAmount")
+    @MethodSource("provideExpectedAmount")
     void calculateBenefitsAmount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
         Customer customer = new Customer(dateToVisit, selectedMenu);
-        BenefitsContainer benefitsContainer = BenefitsContainer.of(customer);
+        BenefitsContainer benefitsContainer = new BenefitsContainer(customer);
 
         int expectedBenefitsAmount = expectedAmount.get(0);
         assertThat(benefitsContainer.calculateBenefitsAmount()).isEqualTo(expectedBenefitsAmount);
     }
 
-    @DisplayName("정확한 실제 할인 금액을 반환하는지 확인")
+    @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 실제 할인 금액을 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
-    @MethodSource("provideDateAndExpectedAmount")
+    @MethodSource("provideExpectedAmount")
     void calculateDiscountAmount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
         Customer customer = new Customer(dateToVisit, selectedMenu);
-        BenefitsContainer benefitsContainer = BenefitsContainer.of(customer);
+        BenefitsContainer benefitsContainer = new BenefitsContainer(customer);
 
         int expectedActualDiscountAmount = expectedAmount.get(1);
         assertThat(benefitsContainer.calculateDiscountAmount()).isEqualTo(expectedActualDiscountAmount);
     }
 
-    @DisplayName("정확한 할인 후 금액을 반환하는지 확인")
+    @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 할인 후 금액을 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
-    @MethodSource("provideDateAndExpectedAmount")
+    @MethodSource("provideExpectedAmount")
     void calculateAmountAfterDiscount(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
         Customer customer = new Customer(dateToVisit, selectedMenu);
-        BenefitsContainer benefitsContainer = BenefitsContainer.of(customer);
+        BenefitsContainer benefitsContainer = new BenefitsContainer(customer);
 
         int expectedAmountToPay = AMOUNT_BEFORE_DISCOUNT + expectedAmount.get(1);
         assertThat(benefitsContainer.calculateAmountAfterDiscount()).isEqualTo(expectedAmountToPay);
     }
 
-    static Stream<Arguments> provideDateAndExpectedAmount() {
+    @DisplayName("모든 메뉴를 1개씩 선택했을 때, 정확한 할인 내역을 반환하는지 확인")
+    @ParameterizedTest(name = "12월 {0}일")
+    @MethodSource("provideExpectedDescription")
+    void getDiscountDescription(int dayOfMonthToVisit, String[] expectedDiscounts) {
+        LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0);
+        Customer customer = new Customer(dateToVisit, selectedMenu);
+        BenefitsContainer benefitsContainer = new BenefitsContainer(customer);
+
+        assertThat(benefitsContainer.getDiscountDescription()).contains(expectedDiscounts);
+    }
+
+    static Stream<Arguments> provideExpectedAmount() {
         // 날짜는 일,월,화,수,목,금,토가 모두 포함되도록 지정
         // 메서드의 재사용을 위해, 리스트의 첫 번째 원소는 예상 혜택 금액, 두 번째 원소는 예상 할인 금액으로 지정
+        // 세 번째 파라미터는 예상되는 할인 내역
         return Stream.of(
                 arguments(1, List.of(-(2023 * 4 + 1000 + 25000), -(2023 * 4 + 1000))),
                 arguments(2, List.of(-(2023 * 4 + 1100 + 25000), -(2023 * 4 + 1100))),
@@ -78,6 +90,21 @@ class BenefitsContainerTest {
                 arguments(19, List.of(-(2023 * 2 + 2800 + 25000), -(2023 * 2 + 2800))),
                 arguments(25, List.of(-(2023 * 2 + 3400 + 1000 + 25000), -(2023 * 2 + 3400 + 1000))),
                 arguments(31, List.of(-(2023 * 2 + 1000 + 25000), -(2023 * 2 + 1000)))
+        );
+    }
+
+    static Stream<Arguments> provideExpectedDescription() {
+        // 날짜는 일,월,화,수,목,금,토가 모두 포함되도록 지정
+        // 메서드의 재사용을 위해, 리스트의 첫 번째 원소는 예상 혜택 금액, 두 번째 원소는 예상 할인 금액으로 지정
+        // 세 번째 파라미터는 예상되는 할인 내역
+        return Stream.of(
+                arguments(1, new String[]{"크리스마스 디데이 할인: -1,000원", "주말 할인: -8,092원", "증정 이벤트: -25,000원"}),
+                arguments(2, new String[]{"크리스마스 디데이 할인: -1,100원", "주말 할인: -8,092원", "증정 이벤트: -25,000원"}),
+                arguments(7, new String[]{"크리스마스 디데이 할인: -1,600원", "평일 할인: -4,046원", "증정 이벤트: -25,000원"}),
+                arguments(13, new String[]{"크리스마스 디데이 할인: -2,200원", "평일 할인: -4,046원", "증정 이벤트: -25,000원"}),
+                arguments(19, new String[]{"크리스마스 디데이 할인: -2,800원", "평일 할인: -4,046원", "증정 이벤트: -25,000원"}),
+                arguments(25, new String[]{"크리스마스 디데이 할인: -3,400원", "평일 할인: -4,046원", "증정 이벤트: -25,000원"}),
+                arguments(31, new String[]{"평일 할인: -4,046원", "특별 할인: -1,000원", "증정 이벤트: -25,000원"})
         );
     }
 }
