@@ -1,5 +1,8 @@
 package christmas.service;
 
+import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -37,7 +40,7 @@ class CustomerServiceWithDiscountTest {
         // 증정 메뉴는 금액으로 결정되기에, 1일부터 31일까지 무작위 선택
         int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, randomDayOfMonth, 0, 0),
+                LocalDateTime.of(2023, 12, randomDayOfMonth, RANDOM_HOUR, RANDOM_MINUTE),
                 menuToOrder
         );
         CustomerService customerService = new CustomerServiceWithDiscount(customer);
@@ -51,7 +54,7 @@ class CustomerServiceWithDiscountTest {
     @MethodSource("provideDiscountDescription")
     void showDiscountDescription_WithAllMenu(int dayOfMonthToVisit, String[] expectedDiscountDescription) {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0),
+                LocalDateTime.of(2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE),
                 menuToOrder
         );
         CustomerService customerService = new CustomerServiceWithDiscount(customer);
@@ -64,7 +67,7 @@ class CustomerServiceWithDiscountTest {
     @MethodSource("provideExpectedAmount")
     void showTotalBenefitsAmount_WithAllMenu(int dayOfMonthToVisit, List<String> expectedAmounts) {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0),
+                LocalDateTime.of(2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE),
                 menuToOrder
         );
         CustomerService customerService = new CustomerServiceWithDiscount(customer);
@@ -78,7 +81,7 @@ class CustomerServiceWithDiscountTest {
     @MethodSource("provideExpectedAmount")
     void showExpectedAmountToPay_WithAllMenu(int dayOfMonthToVisit, List<String> expectedAmounts) {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0),
+                LocalDateTime.of(2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE),
                 menuToOrder
         );
         CustomerService customerService = new CustomerServiceWithDiscount(customer);
@@ -90,10 +93,8 @@ class CustomerServiceWithDiscountTest {
     @DisplayName("모든 메뉴를 1개씩 주문 했을 때, 증정될 배지를 정확히 반환하는지 확인")
     @Test
     void showEventBadge_WithAllMenu() {
-        // 증정 메뉴는 금액으로 결정되기에, 1일부터 31일까지 무작위 선택
-        int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, randomDayOfMonth, 0, 0),
+                LocalDateTime.of(2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                 menuToOrder
         );
         CustomerService customerService = new CustomerServiceWithDiscount(customer);

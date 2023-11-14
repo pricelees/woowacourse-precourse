@@ -1,8 +1,10 @@
 package christmas.service;
 
+import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import christmas.constants.menu.Menu;
 import christmas.domain.Customer;
 import java.time.LocalDateTime;
@@ -17,12 +19,13 @@ class CustomerServiceWithoutDiscountTest {
     // 주문 금액이 10000원 미만이면, 날짜와 상관없이 할인이 적용되지 않기에, 날짜는 무작위 지정
     @BeforeEach
     void setUp() {
-        int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
-        LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, randomDayOfMonth, 0, 0);
+        LocalDateTime dateToVisit = LocalDateTime.of(
+                2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE
+        );
         Map<Menu, Integer> menuToOrder = Map.of(Menu.TAPAS, 1, Menu.ZERO_COKE, 1);
-        Customer custome = new Customer(dateToVisit, menuToOrder);
+        Customer customer = new Customer(dateToVisit, menuToOrder);
 
-        customerService = new CustomerServiceWithoutDiscount(custome);
+        customerService = new CustomerServiceWithoutDiscount(customer);
     }
 
     @DisplayName("이벤트 참여가 불가능할 때, 증정 메뉴 내역 출력 확인")

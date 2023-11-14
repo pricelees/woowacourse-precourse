@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -33,7 +35,9 @@ class DiscountProviderTest {
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedAmount")
     void calculateBenefitsAmount_WithAllMenu(int dayOfMonthToVisit, List<Integer> expectedAmount) {
-        DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0));
+        DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(
+                2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE
+        ));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
         int expectedBenefitsAmount = expectedAmount.get(0);
@@ -44,7 +48,9 @@ class DiscountProviderTest {
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedAmount")
     void calculateDiscountAmount_WithAllMenu(int dayOfMonthToVisit, List<Integer> expectedAmount) {
-        DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0));
+        DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(
+                2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE
+        ));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
         int expectedActualDiscountAmount = expectedAmount.get(1);
@@ -55,7 +61,9 @@ class DiscountProviderTest {
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideExpectedDescription")
     void getDiscountDescription_WithAllMenu(int dayOfMonthToVisit, String[] expectedDiscounts) {
-        DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, dayOfMonthToVisit, 0, 0));
+        DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(
+                2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE
+        ));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
         assertThat(DiscountProvider.allDiscountsDescription(customer)).contains(expectedDiscounts);

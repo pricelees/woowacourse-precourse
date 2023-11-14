@@ -1,9 +1,11 @@
 package christmas.domain;
 
+import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import christmas.constants.menu.Menu;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -19,11 +21,9 @@ class CustomerTest {
 
     @BeforeEach
     void setUp() {
-        // 일, 시간, 분은 예외 테스트와 무관하므로, 범위에 맞게 랜덤하게 지정
-        int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
-        int randomHour = Randoms.pickNumberInRange(0, 24);
-        int randomMinute = Randoms.pickNumberInRange(0, 60);
-        dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, randomDayOfMonth, randomHour, randomMinute));
+        dateToVisit = new DateToVisit(LocalDateTime.of(
+                2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE
+        ));
     }
 
     @DisplayName("구매 금액에 따른 샴페인 증정 여부 확인")

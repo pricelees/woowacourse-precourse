@@ -1,5 +1,7 @@
 package christmas.discount;
 
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -22,7 +24,7 @@ class WeekdayDiscountTest {
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideWeekend")
     void getDiscountAmount_WithWeekend_ThrowsException(int dayOfMonth) {
-        LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonth, 0, 0);
+        LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonth, RANDOM_HOUR, RANDOM_MINUTE);
         // 메뉴는 테스트와 무관하므로 임의 설정
         Map<Menu, Integer> menuToOrder = Map.of(Menu.TAPAS, 1, Menu.CHRISTMAS_PASTA, 1);
         Customer customer = new Customer(dateToVisit, menuToOrder);
@@ -52,7 +54,7 @@ class WeekdayDiscountTest {
 
     static Stream<Arguments> provideWeekend() {
         return IntStream.rangeClosed(1, 31)
-                .mapToObj(day -> LocalDateTime.of(2023, 12, day, 0, 0, 0))
+                .mapToObj(day -> LocalDateTime.of(2023, 12, day, RANDOM_HOUR, RANDOM_MINUTE))
                 .filter(day -> EventTime.WEEKENDS.contains(day.getDayOfWeek()))
                 .map(day -> Arguments.arguments(day.getDayOfMonth()));
     }
@@ -62,32 +64,32 @@ class WeekdayDiscountTest {
         return Stream.of(
                 arguments(
                         "12월 3일 일요일, 디저트 개수 1개",
-                        LocalDateTime.of(2023, 12, 3, 0, 0),
+                        LocalDateTime.of(2023, 12, 3, RANDOM_HOUR, RANDOM_MINUTE),
                         Map.of(Menu.CHOCOLATE_CAKE, 1)
                 ),
                 arguments(
                         "12월 11일 월요일, 디저트 개수 2개",
-                        LocalDateTime.of(2023, 12, 11, 0, 0),
+                        LocalDateTime.of(2023, 12, 11, RANDOM_HOUR, RANDOM_MINUTE),
                         Map.of(Menu.CHOCOLATE_CAKE, 1, Menu.ICE_CREAM, 1)
                 ),
                 arguments(
                         "12월 19일 화요일, 디저트 개수 3개",
-                        LocalDateTime.of(2023, 12, 19, 0, 0),
+                        LocalDateTime.of(2023, 12, 19, RANDOM_HOUR, RANDOM_MINUTE),
                         Map.of(Menu.CHOCOLATE_CAKE, 2, Menu.ICE_CREAM, 1)
                 ),
                 arguments(
                         "12월 27일 수요일, 디저트 개수 4개",
-                        LocalDateTime.of(2023, 12, 27, 0, 0),
+                        LocalDateTime.of(2023, 12, 27, RANDOM_HOUR, RANDOM_MINUTE),
                         Map.of(Menu.CHOCOLATE_CAKE, 2, Menu.ICE_CREAM, 2)
                 ),
                 arguments(
                         "12월 28일 목요일, 디저트 개수 5개",
-                        LocalDateTime.of(2023, 12, 28, 0, 0),
+                        LocalDateTime.of(2023, 12, 28, RANDOM_HOUR, RANDOM_MINUTE),
                         Map.of(Menu.CHOCOLATE_CAKE, 3, Menu.ICE_CREAM, 2)
                 ),
                 arguments(
                         "12월 31일 일요일, 디저트 개수 6개",
-                        LocalDateTime.of(2023, 12, 31, 0, 0),
+                        LocalDateTime.of(2023, 12, 31, RANDOM_HOUR, RANDOM_MINUTE),
                         Map.of(Menu.CHOCOLATE_CAKE, 3, Menu.ICE_CREAM, 3)
                 )
         );

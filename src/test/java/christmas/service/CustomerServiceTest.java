@@ -1,5 +1,8 @@
 package christmas.service;
 
+import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.constants.menu.Menu;
@@ -16,7 +19,7 @@ class CustomerServiceTest {
     @Test
     void showOrderedMenu_WithCannotParticipateEvent() {
         CustomerService customerService = CustomerServiceFinder.find(
-                LocalDateTime.of(2023, 12, 25, 0, 0),
+                LocalDateTime.of(2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                 Map.of(Menu.MUSHROOM_SOUP, 1, Menu.ZERO_COKE, 1)
         );
 
@@ -28,7 +31,7 @@ class CustomerServiceTest {
     @Test
     void showOrderedMenu_WithCanParticipateEvent() {
         CustomerService customerService = CustomerServiceFinder.find(
-                LocalDateTime.of(2023, 12, 25, 0, 0),
+                LocalDateTime.of(2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                 Map.of(Menu.CAESAR_SALAD, 1, Menu.T_BONE_STEAK, 1,
                         Menu.ICE_CREAM, 1, Menu.RED_WINE, 1)
         );

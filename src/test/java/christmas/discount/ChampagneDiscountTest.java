@@ -1,5 +1,8 @@
 package christmas.discount;
 
+import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.constants.menu.Menu;
@@ -14,7 +17,7 @@ class ChampagneDiscountTest {
     @Test
     void getDiscountAmount_WithInvalidAmount_ThrowsException() {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, 1, 0, 0, 0),
+                LocalDateTime.of(2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                 Map.of(Menu.BBQ_RIBS, 1)
         );
         DiscountStrategy discountStrategy = ChampagneDiscount.getInstance();
@@ -27,7 +30,7 @@ class ChampagneDiscountTest {
     @Test
     void getDiscountAmount_WithValidInput() {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, 1, 0, 0, 0),
+                LocalDateTime.of(2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                 Map.of(Menu.CHRISTMAS_PASTA, 10)
         );
         DiscountStrategy discountStrategy = ChampagneDiscount.getInstance();

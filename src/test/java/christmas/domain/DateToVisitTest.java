@@ -1,9 +1,11 @@
 package christmas.domain;
 
+import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
+import static christmas.TestConstants.RANDOM_HOUR;
+import static christmas.TestConstants.RANDOM_MINUTE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
@@ -26,19 +28,15 @@ class DateToVisitTest {
     }
 
     static Stream<Arguments> provideInvalidYearAndMonth() {
-        // 일,시,분은 테스트와 무관하므로 랜덤값으로 지정
-        int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
-        int randomHour = Randoms.pickNumberInRange(0, 24);
-        int randomMinute = Randoms.pickNumberInRange(0, 60);
         return Stream.of(
                 arguments(
                         "2024년 12월인 경우",
-                        LocalDateTime.of(2024, 12, randomDayOfMonth, randomHour, randomMinute),
+                        LocalDateTime.of(2024, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                         "[ERROR] 이벤트는 2023년에 진행됩니다."
                 ),
                 arguments(
                         "2023년 11월인 경우",
-                        LocalDateTime.of(2023, 11, randomDayOfMonth, randomHour, randomMinute),
+                        LocalDateTime.of(2023, 11, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE),
                         "[ERROR] 이벤트는 12월에만 진행됩니다."
                 )
         );
