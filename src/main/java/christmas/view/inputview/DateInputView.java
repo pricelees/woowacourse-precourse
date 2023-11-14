@@ -12,6 +12,8 @@ public class DateInputView {
         String input = Console.readLine();
         validateDateFormat(input);
 
+        // 날짜가 1일부터 31일까지인지에 대한 검증
+        // 1일부터 31일 까지의 값이 아니면, LocalDateTime 객체를 만들 때 DateTimeException이 발생함
         try {
             return LocalDateTime.of(
                     EventTime.YEAR, EventTime.MONTH, Integer.parseInt(input),
