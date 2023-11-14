@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.Customer;
+import christmas.domain.DateToVisit;
 import christmas.util.PriceFormatter;
 
 public abstract class CustomerService {
@@ -19,7 +20,8 @@ public abstract class CustomerService {
     }
 
     public int getDayOfMonth() {
-        return customer.dayOfMonthToVisit();
+        DateToVisit dateToVisit = customer.dateToVisit();
+        return dateToVisit.dayOfMonth();
     }
 
     public abstract String showFreeMenu();
