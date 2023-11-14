@@ -1,9 +1,7 @@
 package christmas;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
 public class TestConstants {
-    public static final int RANDOM_DAY_OF_MONTH = Randoms.pickNumberInRange(1, 31);
-    public static final int RANDOM_HOUR = Randoms.pickNumberInRange(0, 23);
-    public static final int RANDOM_MINUTE = Randoms.pickNumberInRange(0, 59);
+    public static final int CHRISTMAS = 25;
+    public static final int HOUR_17 = 17;
+    public static final int MINUTE_00 = 0;
 }

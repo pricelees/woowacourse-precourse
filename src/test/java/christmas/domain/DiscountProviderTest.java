@@ -1,7 +1,7 @@
 package christmas.domain;
 
-import static christmas.TestConstants.RANDOM_HOUR;
-import static christmas.TestConstants.RANDOM_MINUTE;
+import static christmas.TestConstants.HOUR_17;
+import static christmas.TestConstants.MINUTE_00;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -36,7 +36,7 @@ class DiscountProviderTest {
     @MethodSource("provideExpectedAmount")
     void calculateBenefitsAmount_WithAllMenu(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(
-                2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE
+                2023, 12, dayOfMonthToVisit, HOUR_17, MINUTE_00
         ));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
@@ -49,7 +49,7 @@ class DiscountProviderTest {
     @MethodSource("provideExpectedAmount")
     void calculateDiscountAmount_WithAllMenu(int dayOfMonthToVisit, List<Integer> expectedAmount) {
         DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(
-                2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE
+                2023, 12, dayOfMonthToVisit, HOUR_17, MINUTE_00
         ));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 
@@ -62,7 +62,7 @@ class DiscountProviderTest {
     @MethodSource("provideExpectedDescription")
     void getDiscountDescription_WithAllMenu(int dayOfMonthToVisit, String[] expectedDiscounts) {
         DateToVisit dateToVisit = new DateToVisit(LocalDateTime.of(
-                2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE
+                2023, 12, dayOfMonthToVisit, HOUR_17, MINUTE_00
         ));
         Customer customer = new Customer(dateToVisit, selectedMenu);
 

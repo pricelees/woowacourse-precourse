@@ -1,7 +1,7 @@
 package christmas.discount;
 
-import static christmas.TestConstants.RANDOM_HOUR;
-import static christmas.TestConstants.RANDOM_MINUTE;
+import static christmas.TestConstants.HOUR_17;
+import static christmas.TestConstants.MINUTE_00;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -28,7 +28,7 @@ class ChristmasDiscountTest {
     @ValueSource(ints = {26, 27, 28, 29, 30, 31})
     void getDiscountAmount_AfterChristmas_ThrowsException(int dayOfMonthToVisit) {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE),
+                LocalDateTime.of(2023, 12, dayOfMonthToVisit, HOUR_17, MINUTE_00),
                 menuToOrder
         );
         DiscountStrategy discountStrategy = ChristmasDiscount.getInstance();
@@ -42,7 +42,7 @@ class ChristmasDiscountTest {
     @MethodSource("provideExpectedDiscountAmountByDay")
     void getDiscountAmount_WithAllDaysBeforeChristmas(int dayOfMonthToVisit, int expectedDiscountAmount) {
         Customer customer = new Customer(
-                LocalDateTime.of(2023, 12, dayOfMonthToVisit, RANDOM_HOUR, RANDOM_MINUTE),
+                LocalDateTime.of(2023, 12, dayOfMonthToVisit, HOUR_17, MINUTE_00),
                 menuToOrder
         );
         DiscountStrategy discountStrategy = ChristmasDiscount.getInstance();

@@ -1,8 +1,8 @@
 package christmas.domain;
 
-import static christmas.TestConstants.RANDOM_DAY_OF_MONTH;
-import static christmas.TestConstants.RANDOM_HOUR;
-import static christmas.TestConstants.RANDOM_MINUTE;
+import static christmas.TestConstants.CHRISTMAS;
+import static christmas.TestConstants.HOUR_17;
+import static christmas.TestConstants.MINUTE_00;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -22,7 +22,7 @@ class CustomerTest {
     @BeforeEach
     void setUp() {
         dateToVisit = new DateToVisit(LocalDateTime.of(
-                2023, 12, RANDOM_DAY_OF_MONTH, RANDOM_HOUR, RANDOM_MINUTE
+                2023, 12, CHRISTMAS, HOUR_17, MINUTE_00
         ));
     }
 
