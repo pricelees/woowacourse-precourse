@@ -46,7 +46,7 @@ class CustomerServiceWithDiscountTest {
         assertThat(customerService.showFreeMenu()).isEqualTo(expectedMessage);
     }
 
-    @DisplayName("할인 내역을 정확히 반환하는지 확인")
+    @DisplayName("모든 메뉴를 1개씩 주문했을 때, 할인 내역을 정확히 반환하는지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideDiscountDescription")
     void showDiscountDescription(int dayOfMonthToVisit, String[] expectedDiscountDescription) {
@@ -97,9 +97,9 @@ class CustomerServiceWithDiscountTest {
                 menuToOrder
         );
         CustomerService customerService = new CustomerServiceWithDiscount(customer);
-        String expectedMessage = "산타";
+        String expectedBadgeName = "산타";
 
-        assertThat(customerService.showEventBadge()).isEqualTo(expectedMessage);
+        assertThat(customerService.showEventBadge()).isEqualTo(expectedBadgeName);
     }
 
     static Stream<Arguments> provideDiscountDescription() {
