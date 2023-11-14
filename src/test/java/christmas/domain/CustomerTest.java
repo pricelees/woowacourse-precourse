@@ -1,37 +1,35 @@
 package christmas.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import christmas.constants.menu.Menu;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class CustomerTest {
-    @DisplayName("유효하지 않은 날짜 정보를 입력했을 때 예외 발생 확인")
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("provideInvalidDate")
-    void constructor_WithInvalidDate_ThrowsException(String testName, LocalDateTime date, String expectedErrorMessage) {
-        // SelectedMenu는 예외를 발생시키지 않도록 임의 지정
-        SelectedMenu selectedMenu = new SelectedMenu(Map.of(Menu.TAPAS, 10));
-        assertThatThrownBy(() -> new Customer(date, selectedMenu))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(expectedErrorMessage);
+    DateToVisit dateToVisit;
+
+    @BeforeEach
+    void setUp() {
+        int randomDayOfMonth = Randoms.pickNumberInRange(1, 31);
+        int randomHour = Randoms.pickNumberInRange(0, 24);
+        int randomMinute = Randoms.pickNumberInRange(0, 60);
+        dateToVisit = new DateToVisit(LocalDateTime.of(2023, 12, randomDayOfMonth, randomHour, randomMinute));
     }
 
     @DisplayName("구매 금액에 따른 샴페인 증정 여부 확인")
     @ParameterizedTest(name = "{0}")
     @MethodSource("provideArgumentsForChampagneTest")
     void canReceiveFreeChampagne(String testName, SelectedMenu selectedMenu, boolean expectedResult) {
-        // 날짜는 임의 지정
-        LocalDateTime date = LocalDateTime.of(2023, 12, 3, 18, 0);
-        Customer customer = new Customer(date, selectedMenu);
+        Customer customer = new Customer(dateToVisit, selectedMenu);
 
         assertThat(customer.canReceiveFreeChampagne()).isEqualTo(expectedResult);
     }
@@ -40,22 +38,9 @@ class CustomerTest {
     @ParameterizedTest(name = "{0}")
     @MethodSource("provideArgumentsForEventTest")
     void cannotParticipateEvent(String testName, SelectedMenu selectedMenu, boolean expectedResult) {
-        // 날짜는 임의 지정
-        LocalDateTime date = LocalDateTime.of(2023, 12, 25, 3, 35);
-        Customer customer = new Customer(date, selectedMenu);
+        Customer customer = new Customer(dateToVisit, selectedMenu);
 
         assertThat(customer.cannotParticipateEvent()).isEqualTo(expectedResult);
-    }
-
-    static Stream<Arguments> provideInvalidDate() {
-        return Stream.of(
-                arguments("2024년을 입력한 경우",
-                        LocalDateTime.of(2024, 12, 1, 0, 0),
-                        "[ERROR] 이벤트는 2023년에 진행됩니다."),
-                arguments("11월을 입력한 경우",
-                        LocalDateTime.of(2023, 11, 1, 0, 0),
-                        "[ERROR] 이벤트는 12월에만 진행됩니다.")
-        );
     }
 
     static Stream<Arguments> provideArgumentsForChampagneTest() {
