@@ -2,31 +2,20 @@ package christmas.domain;
 
 import christmas.constants.Constants;
 import christmas.discount.ChampagneDiscount;
-import christmas.discount.ChristmasDiscount;
+import christmas.discount.Discount;
 import christmas.discount.DiscountStrategy;
-import christmas.discount.SpecialDiscount;
-import christmas.discount.WeekdayDiscount;
-import christmas.discount.WeekendDiscount;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class DiscountProvider {
-    private static final List<DiscountStrategy> ALL_DISCOUNT_TYPES = List.of(
-            ChristmasDiscount.getInstance(),
-            WeekdayDiscount.getInstance(),
-            WeekendDiscount.getInstance(),
-            SpecialDiscount.getInstance(),
-            ChampagneDiscount.getInstance()
-    );
-
     public static int totalBenefitsAmount(Customer customer) {
-        return ALL_DISCOUNT_TYPES.stream()
+        return Discount.loadAllDiscounts().stream()
                 .mapToInt(type -> type.getDiscountAmount(customer))
                 .sum();
     }
 
     public static int actualDiscountAmount(Customer customer) {
-        return ALL_DISCOUNT_TYPES.stream()
+        return Discount.loadAllDiscounts().stream()
                 .filter(DiscountProvider::isNotChampagneDiscount)
                 .mapToInt(type -> type.getDiscountAmount(customer))
                 .sum();
@@ -39,7 +28,7 @@ public class DiscountProvider {
     }
 
     private static List<DiscountStrategy> availableDiscounts(Customer customer) {
-        return ALL_DISCOUNT_TYPES.stream()
+        return Discount.loadAllDiscounts().stream()
                 .filter(type -> canDiscount(type, customer))
                 .toList();
     }
