@@ -5,7 +5,6 @@ import christmas.domain.BadgeContainer;
 import christmas.domain.BenefitsContainer;
 import christmas.domain.Customer;
 import christmas.util.PriceFormatter;
-import java.util.stream.Collectors;
 
 public class CustomerServiceWithDiscount extends CustomerService {
     private static final String ONE_CHAMPAGNE = "샴페인 1개";
@@ -13,7 +12,7 @@ public class CustomerServiceWithDiscount extends CustomerService {
 
     public CustomerServiceWithDiscount(Customer customer) {
         super(customer);
-        this.benefitsContainer = BenefitsContainer.of(customer);
+        this.benefitsContainer = new BenefitsContainer(customer);
     }
 
     @Override
@@ -26,11 +25,7 @@ public class CustomerServiceWithDiscount extends CustomerService {
 
     @Override
     public String showDiscountDescription() {
-        return benefitsContainer.discountTypes().stream()
-                .map(type -> type.getTypeName()
-                        + Constants.COLON_WITH_SPACE
-                        + PriceFormatter.format(type.getDiscountAmount(customer)))
-                .collect(Collectors.joining(Constants.LINE_SEPARATOR));
+        return benefitsContainer.getDiscountDescription();
     }
 
     @Override
