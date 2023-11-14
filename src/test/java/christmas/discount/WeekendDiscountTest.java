@@ -1,12 +1,12 @@
 package christmas.discount;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import christmas.constants.menu.Menu;
 import christmas.constants.time.EventTime;
 import christmas.domain.Customer;
+import christmas.domain.DateToVisit;
 import christmas.domain.SelectedMenu;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -18,20 +18,18 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class WeekendDiscountTest {
-    DiscountStrategy discountStrategy = new WeekendDiscount();
-
-    @DisplayName("방문 일자가 평일인 경우 예외 발생 확인")
+    @DisplayName("평일 방문 고객의 할인 금액이 0원인지 확인")
     @ParameterizedTest(name = "12월 {0}일")
     @MethodSource("provideWeekend")
     void getDiscountAmount_WithWeekend_ThrowsException(int dayOfMonth) {
         LocalDateTime dateToVisit = LocalDateTime.of(2023, 12, dayOfMonth, 0, 0);
         // 메뉴는 테스트와 무관하므로 임의 설정
-        SelectedMenu selectedMenu = new SelectedMenu(Map.of(Menu.TAPAS, 1, Menu.CHRISTMAS_PASTA, 1));
-        Customer customer = new Customer(dateToVisit, selectedMenu);
+        Map<Menu, Integer> menuToOrder = Map.of(Menu.TAPAS, 1, Menu.CHRISTMAS_PASTA, 1);
+        Customer customer = new Customer(dateToVisit, menuToOrder);
+        DiscountStrategy discountStrategy = WeekendDiscount.getInstance();
 
-        assertThatThrownBy(() -> discountStrategy.getDiscountAmount(customer))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 해당 이벤트는 주말에만 진행됩니다.");
+        assertThat(discountStrategy.getDiscountAmount(customer))
+                .isEqualTo(0);
     }
 
     @DisplayName("정상적인 입력에 대한 정확한 할인 금액 반환 확인")
@@ -42,9 +40,11 @@ class WeekendDiscountTest {
             LocalDateTime dateToVisit,
             SelectedMenu selectedMenu
     ) {
-        Customer customer = new Customer(dateToVisit, selectedMenu);
-        int expectedDiscountAmount = -(2023 * selectedMenu.getMainMenuCounts());
+        DateToVisit date = new DateToVisit(dateToVisit);
+        Customer customer = new Customer(date, selectedMenu);
+        DiscountStrategy discountStrategy = WeekendDiscount.getInstance();
 
+        int expectedDiscountAmount = -(2023 * selectedMenu.getMainMenuCounts());
         assertThat(discountStrategy.getDiscountAmount(customer))
                 .isEqualTo(expectedDiscountAmount);
     }
