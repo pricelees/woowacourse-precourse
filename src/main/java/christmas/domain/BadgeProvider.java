@@ -7,12 +7,9 @@ import static christmas.constants.badge.EventBadge.TREE_BADGE;
 import christmas.constants.Constants;
 import christmas.constants.domain.DomainErrorMessage;
 
-public record BadgeContainer(int amountAfterDiscount) {
-    public BadgeContainer {
+public class BadgeProvider {
+    public static String getBadgeName(int amountAfterDiscount) {
         validateAmount(amountAfterDiscount);
-    }
-
-    public String getBadgeName() {
         if (amountAfterDiscount >= SANTA_BADGE.getMinimumAmountToGet()) {
             return SANTA_BADGE.toString();
         }
@@ -25,7 +22,7 @@ public record BadgeContainer(int amountAfterDiscount) {
         return Constants.NONE;
     }
 
-    private void validateAmount(int amountAfterDiscount) {
+    private static void validateAmount(int amountAfterDiscount) {
         if (amountAfterDiscount < Constants.ZERO) {
             throw new IllegalArgumentException(DomainErrorMessage.NEGATIVE_AMOUNT_ERROR.getErrorMessage());
         }
