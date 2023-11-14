@@ -1,34 +1,28 @@
 package christmas.discount;
 
-import christmas.constants.discount.DiscountErrorMessage;
+import christmas.constants.Constants;
 import christmas.domain.Customer;
-import java.time.LocalDateTime;
+import christmas.util.PriceFormatter;
 
 public class ChampagneDiscount implements DiscountStrategy {
+    private static final ChampagneDiscount INSTANCE = new ChampagneDiscount();
     private static final String DISCOUNT_TYPE = "증정 이벤트";
     private static final int ONE_CHAMPAGNE_PRICE = 25_000;
 
+    public static ChampagneDiscount getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public int getDiscountAmount(Customer customer) {
-        validateDate(customer.dateToVisit());
-        validateOrderAmount(customer);
-        return -ONE_CHAMPAGNE_PRICE;
-    }
-
-    @Override
-    public void validateDate(LocalDateTime date) {
-        validateYearAndMonth(date);
-    }
-
-    @Override
-    public String getTypeName() {
-        return DISCOUNT_TYPE;
-    }
-
-    private void validateOrderAmount(Customer customer) {
         if (customer.canReceiveFreeChampagne()) {
-            return;
+            return -ONE_CHAMPAGNE_PRICE;
         }
-        throw new IllegalArgumentException(DiscountErrorMessage.CANNOT_RECEIVE_CHAMPAGNE.getErrorMessage());
+        return Constants.ZERO;
+    }
+
+    @Override
+    public String getDescription(Customer customer) {
+        return DISCOUNT_TYPE + Constants.COLON_WITH_SPACE + PriceFormatter.format(getDiscountAmount(customer));
     }
 }

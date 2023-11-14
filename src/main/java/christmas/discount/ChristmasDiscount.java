@@ -1,11 +1,14 @@
 package christmas.discount;
 
-import christmas.constants.discount.DiscountErrorMessage;
+import christmas.constants.Constants;
 import christmas.constants.time.EventTime;
 import christmas.domain.Customer;
+import christmas.domain.DateToVisit;
+import christmas.util.PriceFormatter;
 import java.time.LocalDateTime;
 
 public class ChristmasDiscount implements DiscountStrategy {
+    private static final ChristmasDiscount INSTANCE = new ChristmasDiscount();
     private static final String DISCOUNT_TYPE = "크리스마스 디데이 할인";
     private static final LocalDateTime EVENT_START_DATE = LocalDateTime.of(
             EventTime.YEAR, EventTime.MONTH, EventTime.DAY_OF_MONTH_EVENTS_START,
@@ -13,24 +16,22 @@ public class ChristmasDiscount implements DiscountStrategy {
     private static final int DEFAULT_DISCOUNT_AMOUNT = 1000;
     private static final int DISCOUNT_AMOUNT_PER_DAY = 100;
 
-    @Override
+    public static ChristmasDiscount getInstance() {
+        return INSTANCE;
+    }
+
     public int getDiscountAmount(Customer customer) {
-        validateDate(customer.dateToVisit());
-
-        int totalDay = customer.dayOfMonthToVisit() - EVENT_START_DATE.getDayOfMonth();
-        return -(DEFAULT_DISCOUNT_AMOUNT + (DISCOUNT_AMOUNT_PER_DAY * totalDay));
-    }
-
-    @Override
-    public void validateDate(LocalDateTime date) {
-        validateYearAndMonth(date);
-        if (date.getDayOfMonth() > EventTime.DAY_OF_MONTH_CHRISTMAS) {
-            throw new IllegalArgumentException(DiscountErrorMessage.NOT_BEFORE_CHRISTMAS_ERROR.getErrorMessage());
+        DateToVisit dateToVisit = customer.dateToVisit();
+        if (dateToVisit.isBeforeChristmas()) {
+            int totalDay = dateToVisit.dayOfMonth() - EVENT_START_DATE.getDayOfMonth();
+            return -(DEFAULT_DISCOUNT_AMOUNT + (DISCOUNT_AMOUNT_PER_DAY * totalDay));
         }
+
+        return Constants.ZERO;
     }
 
     @Override
-    public String getTypeName() {
-        return DISCOUNT_TYPE;
+    public String getDescription(Customer customer) {
+        return DISCOUNT_TYPE + Constants.COLON_WITH_SPACE + PriceFormatter.format(getDiscountAmount(customer));
     }
 }

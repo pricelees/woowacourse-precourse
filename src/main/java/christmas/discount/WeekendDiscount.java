@@ -1,31 +1,31 @@
 package christmas.discount;
 
-import christmas.constants.discount.DiscountErrorMessage;
-import christmas.constants.time.EventTime;
+import christmas.constants.Constants;
 import christmas.domain.Customer;
-import java.time.LocalDateTime;
+import christmas.domain.DateToVisit;
+import christmas.util.PriceFormatter;
 
 public class WeekendDiscount implements DiscountStrategy {
+    private static final WeekendDiscount INSTANCE = new WeekendDiscount();
     private static final String DISCOUNT_TYPE = "주말 할인";
     private static final int DISCOUNT_AMOUNT_PER_ONE_MAIN_MENU = 2023;
 
+    public static WeekendDiscount getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public int getDiscountAmount(Customer customer) {
-        validateDate(customer.dateToVisit());
-        return -(customer.countMainMenu() * DISCOUNT_AMOUNT_PER_ONE_MAIN_MENU);
-    }
-
-    @Override
-    public void validateDate(LocalDateTime date) {
-        validateYearAndMonth(date);
-        if (EventTime.WEEKENDS.contains(date.getDayOfWeek())) {
-            return;
+        DateToVisit dateToVisit = customer.dateToVisit();
+        if (dateToVisit.isWeekend()) {
+            return -(customer.countMainMenu() * DISCOUNT_AMOUNT_PER_ONE_MAIN_MENU);
         }
-        throw new IllegalArgumentException(DiscountErrorMessage.NOT_WEEKEND_ERROR.getErrorMessage());
+
+        return Constants.ZERO;
     }
 
     @Override
-    public String getTypeName() {
-        return DISCOUNT_TYPE;
+    public String getDescription(Customer customer) {
+        return DISCOUNT_TYPE + Constants.COLON_WITH_SPACE + PriceFormatter.format(getDiscountAmount(customer));
     }
 }
