@@ -16,6 +16,9 @@ public class ChristmasDiscount implements DiscountStrategy {
     private static final int DEFAULT_DISCOUNT_AMOUNT = 1000;
     private static final int DISCOUNT_AMOUNT_PER_DAY = 100;
 
+    private ChristmasDiscount() {
+    }
+
     public static ChristmasDiscount getInstance() {
         return INSTANCE;
     }

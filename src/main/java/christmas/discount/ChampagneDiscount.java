@@ -9,6 +9,9 @@ public class ChampagneDiscount implements DiscountStrategy {
     private static final String DISCOUNT_TYPE = "증정 이벤트";
     private static final int ONE_CHAMPAGNE_PRICE = 25_000;
 
+    private ChampagneDiscount() {
+    }
+
     public static ChampagneDiscount getInstance() {
         return INSTANCE;
     }

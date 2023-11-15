@@ -14,6 +14,9 @@ public class SpecialDiscount implements DiscountStrategy {
         return INSTANCE;
     }
 
+    private SpecialDiscount() {
+    }
+
     @Override
     public int getDiscountAmount(Customer customer) {
         DateToVisit dateToVisit = customer.dateToVisit();

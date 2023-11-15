@@ -14,6 +14,9 @@ public class WeekdayDiscount implements DiscountStrategy {
         return INSTANCE;
     }
 
+    private WeekdayDiscount() {
+    }
+
     @Override
     public int getDiscountAmount(Customer customer) {
         DateToVisit dateToVisit = customer.dateToVisit();
