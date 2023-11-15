@@ -7,7 +7,7 @@ import christmas.domain.DateToVisit;
 import christmas.util.PriceFormatter;
 import java.time.LocalDateTime;
 
-public class ChristmasDiscount implements DiscountStrategy {
+public final class ChristmasDiscount implements DiscountStrategy {
     private static final ChristmasDiscount INSTANCE = new ChristmasDiscount();
     private static final String DISCOUNT_TYPE = "크리스마스 디데이 할인";
     private static final LocalDateTime EVENT_START_DATE = LocalDateTime.of(
@@ -23,10 +23,10 @@ public class ChristmasDiscount implements DiscountStrategy {
         return INSTANCE;
     }
 
-    public int getDiscountAmount(Customer customer) {
-        DateToVisit dateToVisit = customer.dateToVisit();
+    public int getDiscountAmount(final Customer customer) {
+        final DateToVisit dateToVisit = customer.dateToVisit();
         if (dateToVisit.isBeforeChristmas()) {
-            int totalDay = dateToVisit.dayOfMonth() - EVENT_START_DATE.getDayOfMonth();
+            final int totalDay = dateToVisit.dayOfMonth() - EVENT_START_DATE.getDayOfMonth();
             return -(DEFAULT_DISCOUNT_AMOUNT + (DISCOUNT_AMOUNT_PER_DAY * totalDay));
         }
 
@@ -34,7 +34,7 @@ public class ChristmasDiscount implements DiscountStrategy {
     }
 
     @Override
-    public String getDescription(Customer customer) {
+    public String getDescription(final Customer customer) {
         return DISCOUNT_TYPE + Constants.COLON_WITH_SPACE + PriceFormatter.format(getDiscountAmount(customer));
     }
 }

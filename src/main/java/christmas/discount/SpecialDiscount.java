@@ -5,7 +5,7 @@ import christmas.domain.Customer;
 import christmas.domain.DateToVisit;
 import christmas.util.PriceFormatter;
 
-public class SpecialDiscount implements DiscountStrategy {
+public final class SpecialDiscount implements DiscountStrategy {
     private static final SpecialDiscount INSTANCE = new SpecialDiscount();
     private static final String DISCOUNT_TYPE = "특별 할인";
     private static final int DISCOUNT_AMOUNT = 1000;
@@ -18,8 +18,8 @@ public class SpecialDiscount implements DiscountStrategy {
     }
 
     @Override
-    public int getDiscountAmount(Customer customer) {
-        DateToVisit dateToVisit = customer.dateToVisit();
+    public int getDiscountAmount(final Customer customer) {
+        final DateToVisit dateToVisit = customer.dateToVisit();
         if (dateToVisit.isSpecialDay()) {
             return -DISCOUNT_AMOUNT;
         }
@@ -28,7 +28,7 @@ public class SpecialDiscount implements DiscountStrategy {
     }
 
     @Override
-    public String getDescription(Customer customer) {
+    public String getDescription(final Customer customer) {
         return DISCOUNT_TYPE + Constants.COLON_WITH_SPACE + PriceFormatter.format(getDiscountAmount(customer));
     }
 }

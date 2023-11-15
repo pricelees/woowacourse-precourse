@@ -4,7 +4,7 @@ import christmas.constants.Constants;
 import christmas.domain.Customer;
 import christmas.util.PriceFormatter;
 
-public class ChampagneDiscount implements DiscountStrategy {
+public final class ChampagneDiscount implements DiscountStrategy {
     private static final ChampagneDiscount INSTANCE = new ChampagneDiscount();
     private static final String DISCOUNT_TYPE = "증정 이벤트";
     private static final int ONE_CHAMPAGNE_PRICE = 25_000;
@@ -17,7 +17,7 @@ public class ChampagneDiscount implements DiscountStrategy {
     }
 
     @Override
-    public int getDiscountAmount(Customer customer) {
+    public int getDiscountAmount(final Customer customer) {
         if (customer.canReceiveFreeChampagne()) {
             return -ONE_CHAMPAGNE_PRICE;
         }
@@ -25,7 +25,7 @@ public class ChampagneDiscount implements DiscountStrategy {
     }
 
     @Override
-    public String getDescription(Customer customer) {
+    public String getDescription(final Customer customer) {
         return DISCOUNT_TYPE + Constants.COLON_WITH_SPACE + PriceFormatter.format(getDiscountAmount(customer));
     }
 }

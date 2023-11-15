@@ -5,7 +5,7 @@ import christmas.domain.Customer;
 import christmas.domain.DateToVisit;
 import christmas.util.PriceFormatter;
 
-public class WeekdayDiscount implements DiscountStrategy {
+public final class WeekdayDiscount implements DiscountStrategy {
     private static final WeekdayDiscount INSTANCE = new WeekdayDiscount();
     private static final String DISCOUNT_TYPE = "평일 할인";
     private static final int DISCOUNT_AMOUNT_PER_ONE_DESSERT = 2023;
@@ -18,8 +18,8 @@ public class WeekdayDiscount implements DiscountStrategy {
     }
 
     @Override
-    public int getDiscountAmount(Customer customer) {
-        DateToVisit dateToVisit = customer.dateToVisit();
+    public int getDiscountAmount(final Customer customer) {
+        final DateToVisit dateToVisit = customer.dateToVisit();
         if (dateToVisit.isWeekday()) {
             return -(customer.countDessert() * DISCOUNT_AMOUNT_PER_ONE_DESSERT);
         }
