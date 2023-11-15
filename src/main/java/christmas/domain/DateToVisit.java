@@ -30,7 +30,7 @@ public record DateToVisit(LocalDateTime date) {
         return EventTime.SPECIAL_DISCOUNT_DAYS.contains(date.getDayOfMonth());
     }
 
-    // LocalDateTime을 이용하기에, "일" 정보에 대해 예외를 검증할 필요는 없음.
+    // 고객이 방문할 년, 월에 대한 검증
     private void validateDate(LocalDateTime dateToVisit) {
         validateYear(dateToVisit.getYear());
         validateMonth(dateToVisit.getMonth());
