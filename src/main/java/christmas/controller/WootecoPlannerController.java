@@ -8,12 +8,16 @@ import christmas.view.outputview.WootecoPlannerOutputView;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public record WootecoPlannerController(
-        WootecoPlannerInputView wootecoPlannerInputView,
-        WootecoPlannerOutputView wootecoPlannerOutputView
-) implements PlannerControllable {
-    public WootecoPlannerController() {
-        this(new WootecoPlannerInputView(), new WootecoPlannerOutputView());
+public final class WootecoPlannerController implements PlannerControllable {
+    private static final WootecoPlannerController INSTANCE = new WootecoPlannerController();
+    private final WootecoPlannerInputView wootecoPlannerInputView = new WootecoPlannerInputView();
+    private final WootecoPlannerOutputView wootecoPlannerOutputView = new WootecoPlannerOutputView();
+
+    private WootecoPlannerController() {
+    }
+
+    public static WootecoPlannerController getInstance() {
+        return INSTANCE;
     }
 
     public void run() {

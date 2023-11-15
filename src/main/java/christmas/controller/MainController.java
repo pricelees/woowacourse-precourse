@@ -1,6 +1,12 @@
 package christmas.controller;
 
-public record MainController(PlannerControllable plannerControllable) {
+public final class MainController {
+    private final PlannerControllable plannerControllable;
+
+    public MainController(PlannerControllable plannerControllable) {
+        this.plannerControllable = plannerControllable;
+    }
+
     public void run() {
         plannerControllable.run();
     }

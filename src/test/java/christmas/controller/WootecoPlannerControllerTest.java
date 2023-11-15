@@ -6,8 +6,6 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.test.NsTest;
-import christmas.view.inputview.WootecoPlannerInputView;
-import christmas.view.outputview.WootecoPlannerOutputView;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -92,13 +90,7 @@ class WootecoPlannerControllerTest extends NsTest {
 
     @Override
     protected void runMain() {
-        WootecoPlannerInputView wootecoPlannerInputView = new WootecoPlannerInputView();
-        WootecoPlannerOutputView wootecoPlannerOutputView = new WootecoPlannerOutputView();
-        PlannerControllable wootecoPlannerController = new WootecoPlannerController(
-                wootecoPlannerInputView,
-                wootecoPlannerOutputView
-        );
-
+        PlannerControllable wootecoPlannerController = WootecoPlannerController.getInstance();
         wootecoPlannerController.run();
         Console.close();
     }
