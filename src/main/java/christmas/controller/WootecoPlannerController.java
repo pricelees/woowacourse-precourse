@@ -12,6 +12,7 @@ public final class WootecoPlannerController implements PlannerControllable {
     private static final WootecoPlannerController INSTANCE = new WootecoPlannerController();
     private final WootecoPlannerInputView wootecoPlannerInputView = new WootecoPlannerInputView();
     private final WootecoPlannerOutputView wootecoPlannerOutputView = new WootecoPlannerOutputView();
+    private CustomerService customerService;
 
     private WootecoPlannerController() {
     }
@@ -21,8 +22,8 @@ public final class WootecoPlannerController implements PlannerControllable {
     }
 
     public void run() {
-        CustomerService customerService = findServiceWithInput();
-        service(customerService);
+        customerService = findServiceWithInput();
+        service();
     }
 
     private CustomerService findServiceWithInput() {
@@ -33,46 +34,46 @@ public final class WootecoPlannerController implements PlannerControllable {
         return CustomerServiceFinder.find(dateToVisit, menuToOrder);
     }
 
-    private void service(CustomerService customerService) {
-        notifyPreviewMessage(customerService);
-        notifyOrderedMenu(customerService);
-        notifyAmountBeforeDiscount(customerService);
-        notifyFreeMenu(customerService);
-        notifyDiscountDescription(customerService);
-        notifyTotalDiscountAmount(customerService);
-        notifyExpectedAmountToPay(customerService);
-        notifyEventBadgeToGet(customerService);
+    private void service() {
+        notifyPreviewMessage();
+        notifyOrderedMenu();
+        notifyAmountBeforeDiscount();
+        notifyFreeMenu();
+        notifyDiscountDescription();
+        notifyTotalDiscountAmount();
+        notifyExpectedAmountToPay();
+        notifyEventBadgeToGet();
     }
 
-    private void notifyPreviewMessage(CustomerService customerService) {
+    private void notifyPreviewMessage() {
         wootecoPlannerOutputView.printPreviewMessage(customerService.getDayOfMonth());
     }
 
-    private void notifyOrderedMenu(CustomerService customerService) {
+    private void notifyOrderedMenu() {
         wootecoPlannerOutputView.printOrderedMenu(customerService.showOrderedMenu());
     }
 
-    private void notifyAmountBeforeDiscount(CustomerService customerService) {
+    private void notifyAmountBeforeDiscount() {
         wootecoPlannerOutputView.printAmountBeforeDiscount(customerService.showAmountBeforeDiscount());
     }
 
-    private void notifyFreeMenu(CustomerService customerService) {
+    private void notifyFreeMenu() {
         wootecoPlannerOutputView.printFreeMenu(customerService.showFreeMenu());
     }
 
-    private void notifyDiscountDescription(CustomerService customerService) {
+    private void notifyDiscountDescription() {
         wootecoPlannerOutputView.printDiscountDescription(customerService.showDiscountDescription());
     }
 
-    private void notifyTotalDiscountAmount(CustomerService customerService) {
+    private void notifyTotalDiscountAmount() {
         wootecoPlannerOutputView.printTotalDiscountAmount(customerService.showTotalBenefitsAmount());
     }
 
-    private void notifyExpectedAmountToPay(CustomerService customerService) {
+    private void notifyExpectedAmountToPay() {
         wootecoPlannerOutputView.printExpectedAmount(customerService.showExpectedAmountToPay());
     }
 
-    private void notifyEventBadgeToGet(CustomerService customerService) {
+    private void notifyEventBadgeToGet() {
         wootecoPlannerOutputView.printEventBadge(customerService.showEventBadge());
     }
 }
