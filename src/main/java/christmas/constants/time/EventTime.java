@@ -24,5 +24,4 @@ public class EventTime {
     public static final int SECOND = 0;
     public static final int DAY_OF_MONTH_EVENTS_START = 1;
     public static final int DAY_OF_MONTH_CHRISTMAS = 25;
-
 }
