@@ -27,7 +27,8 @@
 
 ## 클래스 다이어그램(상수, util 패키지는 제외)
 
-![christmas.png](..%2F..%2F..%2F..%2Fchristmas.png)
+![christmas.png](christmas.png)
+
 --- 
 
 ## 기능 요구 사항
