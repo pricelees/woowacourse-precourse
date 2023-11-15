@@ -8,7 +8,7 @@ import christmas.constants.Constants;
 import christmas.constants.domain.DomainErrorMessage;
 
 public class BadgeProvider {
-    public static String getBadgeName(int amountAfterDiscount) {
+    public static String getBadgeName(final int amountAfterDiscount) {
         validateAmount(amountAfterDiscount);
         if (amountAfterDiscount >= SANTA_BADGE.getMinimumAmountToGet()) {
             return SANTA_BADGE.toString();
@@ -22,7 +22,7 @@ public class BadgeProvider {
         return Constants.NONE;
     }
 
-    private static void validateAmount(int amountAfterDiscount) {
+    private static void validateAmount(final int amountAfterDiscount) {
         if (amountAfterDiscount < Constants.ZERO) {
             throw new IllegalArgumentException(DomainErrorMessage.NEGATIVE_AMOUNT_ERROR.getErrorMessage());
         }

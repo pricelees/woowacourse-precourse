@@ -5,7 +5,7 @@ import christmas.domain.Customer;
 import christmas.util.PriceFormatter;
 
 public class CustomerServiceWithoutDiscount extends CustomerService {
-    public CustomerServiceWithoutDiscount(Customer customer) {
+    public CustomerServiceWithoutDiscount(final Customer customer) {
         super(customer);
     }
 

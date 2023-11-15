@@ -8,7 +8,7 @@ public record Customer(DateToVisit dateToVisit, SelectedMenu selectedMenu) {
     private static final int MINIMUM_AMOUNT_TO_GET_CHAMPAGNE = 120_000;
     private static final int MINIMUM_AMOUNT_TO_PARTICIPATE_EVENT = 10_000;
 
-    public Customer(LocalDateTime date, Map<Menu, Integer> menuToOrder) {
+    public Customer(final LocalDateTime date, final Map<Menu, Integer> menuToOrder) {
         this(new DateToVisit(date), new SelectedMenu(menuToOrder));
     }
 

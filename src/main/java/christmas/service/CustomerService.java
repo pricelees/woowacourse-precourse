@@ -7,7 +7,7 @@ import christmas.util.PriceFormatter;
 public abstract class CustomerService {
     protected final Customer customer;
 
-    public CustomerService(Customer customer) {
+    public CustomerService(final Customer customer) {
         this.customer = customer;
     }
 

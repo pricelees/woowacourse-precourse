@@ -31,18 +31,18 @@ public record DateToVisit(LocalDateTime date) {
     }
 
     // 고객이 방문할 년, 월에 대한 검증
-    private void validateDate(LocalDateTime dateToVisit) {
+    private void validateDate(final LocalDateTime dateToVisit) {
         validateYear(dateToVisit.getYear());
         validateMonth(dateToVisit.getMonth());
     }
 
-    private void validateYear(int year) {
+    private void validateYear(final int year) {
         if (year != EventTime.YEAR) {
             throw new IllegalArgumentException(DomainErrorMessage.INVALID_YEAR_ERROR.getErrorMessage());
         }
     }
 
-    private void validateMonth(Month month) {
+    private void validateMonth(final Month month) {
         if (month != EventTime.MONTH) {
             throw new IllegalArgumentException(DomainErrorMessage.INVALID_MONTH_ERROR.getErrorMessage());
         }

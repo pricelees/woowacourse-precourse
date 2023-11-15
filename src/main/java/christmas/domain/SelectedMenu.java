@@ -35,7 +35,7 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
                 .sum();
     }
 
-    private void validateMenuAndCount(Map<Menu, Integer> menuAndCounts) {
+    private void validateMenuAndCount(final Map<Menu, Integer> menuAndCounts) {
         if (isOverMaxMenuCount(menuAndCounts)) {
             throw new IllegalArgumentException(DomainErrorMessage.OVER_MAX_MENU_COUNT_ERROR.getErrorMessage());
         }
@@ -44,13 +44,13 @@ public record SelectedMenu(Map<Menu, Integer> menuAndCounts) {
         }
     }
 
-    private boolean isOverMaxMenuCount(Map<Menu, Integer> menuAndCounts) {
+    private boolean isOverMaxMenuCount(final Map<Menu, Integer> menuAndCounts) {
         return menuAndCounts.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum() > Constants.MAXIMUM_TOTAL_MENU_COUNT;
     }
 
-    private boolean hasOnlyDrink(Map<Menu, Integer> menuAndCounts) {
+    private boolean hasOnlyDrink(final Map<Menu, Integer> menuAndCounts) {
         return menuAndCounts.keySet()
                 .stream()
                 .allMatch(menu -> menu.isSameCategory(MenuCategory.DRINK));

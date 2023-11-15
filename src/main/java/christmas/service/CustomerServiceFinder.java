@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 public class CustomerServiceFinder {
-    public static CustomerService find(LocalDateTime dateToVisit, Map<Menu, Integer> menuToOrder) {
+    public static CustomerService find(final LocalDateTime dateToVisit, final Map<Menu, Integer> menuToOrder) {
         Customer customer = new Customer(dateToVisit, menuToOrder);
         if (customer.cannotParticipateEvent()) {
             return new CustomerServiceWithoutDiscount(customer);
