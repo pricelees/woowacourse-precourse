@@ -12,12 +12,12 @@ public class InputView {
     private static final String REQUEST_GAME_COMMAND = "게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)";
     private final Reader reader;
     private final Printer printer;
-    private final InputValidator inputValidator;
+    private final ConsoleInputValidator consoleInputValidator;
 
-    public InputView(Reader reader, Printer printer, InputValidator inputValidator) {
+    public InputView(Reader reader, Printer printer, ConsoleInputValidator consoleInputValidator) {
         this.reader = reader;
         this.printer = printer;
-        this.inputValidator = inputValidator;
+        this.consoleInputValidator = consoleInputValidator;
     }
 
     /**
@@ -27,8 +27,8 @@ public class InputView {
         return retryInputOnException(() -> {
             printer.print(REQUEST_BRIDGE_SIZE);
             String input = reader.readLine();
-            inputValidator.validateBridgeSizeFormat(input);
-            inputValidator.validateBridgeSize(Integer.parseInt(input));
+            consoleInputValidator.validateBridgeSizeFormat(input);
+            consoleInputValidator.validateBridgeSize(Integer.parseInt(input));
 
             return Integer.parseInt(input);
         });
@@ -41,7 +41,7 @@ public class InputView {
         return retryInputOnException(() -> {
             printer.print(REQUEST_LOCATION_TO_MOVE);
             String input = reader.readLine();
-            inputValidator.validateLocationToMove(input);
+            consoleInputValidator.validateLocationToMove(input);
             return input;
         });
     }
@@ -53,7 +53,7 @@ public class InputView {
         return retryInputOnException(() -> {
             printer.print(REQUEST_GAME_COMMAND);
             String input = reader.readLine();
-            inputValidator.validateRestartOption(input);
+            consoleInputValidator.validateRestartOption(input);
 
             return input;
         });

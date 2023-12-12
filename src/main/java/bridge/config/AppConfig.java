@@ -1,7 +1,7 @@
 package bridge.config;
 
 import bridge.controller.BridgeGame;
-import bridge.view.input.InputValidator;
+import bridge.view.input.ConsoleInputValidator;
 import bridge.view.input.InputView;
 import bridge.view.input.Reader;
 import bridge.view.output.OutputView;
@@ -34,7 +34,7 @@ public final class AppConfig {
         return new Printer();
     }
 
-    private static InputValidator inputValidator() {
-        return new InputValidator();
+    private static ConsoleInputValidator inputValidator() {
+        return new ConsoleInputValidator();
     }
 }
