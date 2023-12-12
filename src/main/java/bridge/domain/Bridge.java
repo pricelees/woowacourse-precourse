@@ -10,7 +10,9 @@ public class Bridge {
     private final List<String> locationsCanMove;
 
     public Bridge(List<String> locationsCanMove) {
+        BridgeSizeValidator.validate(locationsCanMove);
         locationsCanMove.forEach(LocationValidator::validate);
+
         this.locationsCanMove = locationsCanMove;
     }
 

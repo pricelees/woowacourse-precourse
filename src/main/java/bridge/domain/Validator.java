@@ -11,7 +11,7 @@ public class Validator {
     }
 
     public static class BridgeSizeValidator {
-        private static final String ERROR_MESSAGE = "유효하지 않은 다리 길이";
+        private static final String ERROR_MESSAGE = "유효하지 않은 다리 길이 입력";
         private static final int MIN_BRIDGE_SIZE = 3;
         private static final int MAX_BRIDGE_SIZE = 20;
 
@@ -23,10 +23,14 @@ public class Validator {
                 throw new IllegalArgumentException(ERROR_PREFIX + ERROR_MESSAGE);
             }
         }
+
+        public static void validate(List<String> locationsCanMove) {
+            validate(locationsCanMove.size());
+        }
     }
 
     public static class LocationValidator {
-        private static final String ERROR_MESSAGE = "위치는 위(U), 아래(D)만 가능합니다.";
+        private static final String ERROR_MESSAGE = "유효하지 않은 이동 위치 입력";
         private static final String INVALID_LOCATION_REGEX = "[^UD]";
 
         private LocationValidator() {
@@ -41,7 +45,7 @@ public class Validator {
 
     public static class MapSymbolValidator {
         private static final List<String> AVAILABLE_SYMBOLS = List.of("   ", " O ", " X ");
-        private static final String ERROR_MESSAGE = "유효하지 않은 기호입니다.";
+        private static final String ERROR_MESSAGE = "유효하지 않은 지도 기호 입력";
 
         private MapSymbolValidator() {
         }
@@ -58,7 +62,7 @@ public class Validator {
     }
 
     public static class MovingStepValidator {
-        private static final String ERROR_MESSAGE = "유효하지 않은 이동 단계입니다.";
+        private static final String ERROR_MESSAGE = "유효하지 않은 이동 단계 입력";
 
         private MovingStepValidator() {
         }
