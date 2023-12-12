@@ -1,8 +1,8 @@
 package bridge.domain;
 
-import bridge.domain.Validator.BridgeSizeValidator;
-import bridge.domain.Validator.LocationValidator;
-import bridge.domain.Validator.MovingStepValidator;
+import bridge.domain.DomainInputValidator.BridgeSizeValidator;
+import bridge.domain.DomainInputValidator.LocationValidator;
+import bridge.domain.DomainInputValidator.MovingStepValidator;
 import bridge.util.BridgeMaker;
 import java.util.List;
 

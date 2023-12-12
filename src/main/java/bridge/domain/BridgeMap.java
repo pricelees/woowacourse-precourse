@@ -1,8 +1,8 @@
 package bridge.domain;
 
 import bridge.constants.Constant;
-import bridge.domain.Validator.LocationValidator;
-import bridge.domain.Validator.MapSymbolValidator;
+import bridge.domain.DomainInputValidator.LocationValidator;
+import bridge.domain.DomainInputValidator.MapSymbolValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

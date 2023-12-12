@@ -3,10 +3,10 @@ package bridge.domain;
 import bridge.constants.Constant;
 import java.util.List;
 
-public class Validator {
+public class DomainInputValidator {
     private static final String ERROR_PREFIX = "[ERROR] ";
 
-    private Validator() {
+    private DomainInputValidator() {
 
     }
 
