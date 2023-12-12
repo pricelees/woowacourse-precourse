@@ -1,4 +1,4 @@
-package bridge.controller;
+package bridge.constants;
 
 public enum MovingResult {
     SUCCEED(" O "),

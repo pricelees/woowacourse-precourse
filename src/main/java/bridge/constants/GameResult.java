@@ -1,4 +1,4 @@
-package bridge.controller;
+package bridge.constants;
 
 public enum GameResult {
     SUCCEED("성공"),

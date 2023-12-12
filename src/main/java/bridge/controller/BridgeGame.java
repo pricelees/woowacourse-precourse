@@ -1,6 +1,8 @@
 package bridge.controller;
 
 import bridge.constants.Constant;
+import bridge.constants.GameResult;
+import bridge.constants.MovingResult;
 import bridge.domain.Bridge;
 import bridge.domain.BridgeMap;
 import bridge.dto.CurrentMapResponse;
