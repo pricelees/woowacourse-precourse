@@ -1,6 +1,6 @@
 package pairmatching.config;
 
-import pairmatching.controller.FrontController;
+import pairmatching.controller.PairProgramController;
 import pairmatching.repository.PairsRepository;
 import pairmatching.service.PairMatchingService;
 import pairmatching.service.PairSearchingService;
@@ -12,8 +12,8 @@ import pairmatching.view.output.OutputView;
 import pairmatching.view.output.Printer;
 
 public class AppConfig {
-    public static FrontController frontController() {
-        return new FrontController(pairService(), inputView(), outputView());
+    public static PairProgramController frontController() {
+        return new PairProgramController(pairService(), inputView(), outputView());
     }
     private static PairService pairService() {
         return new PairService(pairsRepository(), pairMatchingService(), pairSearchingService());
