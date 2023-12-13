@@ -19,14 +19,14 @@ public final class AppConfig {
     }
 
     private static Reader reader() {
-        return new Reader();
+        return Reader.getInstance();
     }
 
     private static Printer printer() {
-        return new Printer();
+        return Printer.getInstance();
     }
 
     private static ConsoleInputValidator inputValidator() {
-        return new ConsoleInputValidator();
+        return ConsoleInputValidator.getInstance();
     }
 }
