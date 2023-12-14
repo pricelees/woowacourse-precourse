@@ -12,7 +12,7 @@ import pairmatching.view.output.OutputView;
 import pairmatching.view.output.Printer;
 
 public class AppConfig {
-    public static PairProgramController frontController() {
+    public static PairProgramController pairProgramController() {
         return new PairProgramController(pairService(), inputView(), outputView());
     }
     private static PairService pairService() {

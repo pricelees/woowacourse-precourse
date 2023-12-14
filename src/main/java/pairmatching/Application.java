@@ -1,9 +1,9 @@
 package pairmatching;
 
-import static pairmatching.config.AppConfig.frontController;
+import static pairmatching.config.AppConfig.pairProgramController;
 
 public class Application {
     public static void main(String[] args) {
-        frontController().run();
+        pairProgramController().run();
     }
 }
