@@ -12,12 +12,6 @@ public class Pair {
         this.crews = crews;
     }
 
-    public List<String> getPairInfo() {
-        return crews.stream()
-                .map(Crew::getName)
-                .toList();
-    }
-
     public List<String> getCrewsName() {
         return crews.stream()
                 .map(Crew::getName)
