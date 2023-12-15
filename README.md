@@ -189,7 +189,7 @@ String category = categories.get(Randoms.pickNumberInRange(1, 5));
   - 카테고리에 포함되는 메뉴 목록을 `List<String>` 형태로 준비한다.
 
 ```java
-String menu = Randoms.shuffle(menus).get(0);
+String menuContainer = Randoms.shuffle(menus).get(0);
 ```
 
 - 임의로 메뉴의 순서 또는 데이터를 변경하면 안 된다.
@@ -201,7 +201,7 @@ String menu = Randoms.shuffle(menus).get(0);
 
 ## ✏️ 과제 진행 요구 사항
 
-- 미션은 [java-menu](https://github.com/woowacourse-precourse/java-menu) 저장소를 Fork & Clone해 시작한다.
+- 미션은 [java-menuContainer](https://github.com/woowacourse-precourse/java-menuContainer) 저장소를 Fork & Clone해 시작한다.
 - **기능을 구현하기 전 `docs/README.md`에 구현할 기능 목록을 정리**해 추가한다.
 - **Git의 커밋 단위는 앞 단계에서 `docs/README.md`에 정리한 기능 목록 단위**로 추가한다.
   - [커밋 메시지 컨벤션](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 가이드를 참고해 커밋 메시지를 작성한다.
