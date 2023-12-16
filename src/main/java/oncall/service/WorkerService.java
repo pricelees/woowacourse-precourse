@@ -33,7 +33,7 @@ public class WorkerService {
         Worker worker = workerEntry.getValue();
 
         String dayOfWeek = Date.getDayOfWeekKorean(workingDate.getDayOfWeek());
-        if (Date.isHoliday(workingDate) || Date.isWeekday(workingDate.getDayOfWeek())) {
+        if (Date.isHoliday(workingDate) && Date.isWeekday(workingDate.getDayOfWeek())) {
             dayOfWeek += HOLIDAY;
         }
 
