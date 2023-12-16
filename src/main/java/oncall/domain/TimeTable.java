@@ -33,34 +33,45 @@ public class TimeTable {
             DayOfWeek dayOfWeek = workingCalendar.getDayOfWeek(dayOfMonth);
             WorkingDate workingDate = new WorkingDate(month, dayOfMonth, dayOfWeek);
             if (Date.isWeekday(dayOfWeek)) {
-                int rearrangedOrder = (currentWeekdayOrder + weekdayWorkers.size()) % weekdayWorkers.size();
-                List<Worker> workers = changeWorkersIfDuplicate(workingDate, rearrangedOrder, weekdayWorkers);
-                table.put(workingDate, workers.get(rearrangedOrder));
+                weekdayWorkers = addTimeTable(workingDate, currentWeekdayOrder, weekdayWorkers);
                 currentWeekdayOrder++;
             }
             if (Date.isWeekend(dayOfWeek) || Date.isHoliday(workingDate)) {
-                int rearrangedOrder = (currentHolidayOrder + holidayWorkers.size()) % holidayWorkers.size();
-                List<Worker> workers = changeWorkersIfDuplicate(workingDate, rearrangedOrder, holidayWorkers);
-                table.put(workingDate, workers.get(rearrangedOrder));
+                holidayWorkers = addTimeTable(workingDate, currentHolidayOrder, holidayWorkers);
                 currentHolidayOrder++;
             }
         }
     }
 
+    private List<Worker> addTimeTable(WorkingDate workingDate, int order, List<Worker> workers) {
+        int rearrangedOrder = rearrangeOrder(workers, order);
+        List<Worker> rearrangedWorkers = changeWorkersIfDuplicate(workingDate, rearrangedOrder, workers);
+        table.put(workingDate, rearrangedWorkers.get(rearrangedOrder));
+
+        return rearrangedWorkers;
+    }
+
     private List<Worker> changeWorkersIfDuplicate(WorkingDate workingDate, int currentOrder, List<Worker> workers) {
         List<Worker> result = new ArrayList<>(workers);
-        Worker currentWorker = workers.get(currentOrder);
-        Worker beforeWorker = table.get(workingDate.getBeforeDay());
-        if (currentWorker.equals(beforeWorker)) {
-            Worker nextWorker = workers.get(currentOrder + 1);
+        Worker todayWorker = workers.get(currentOrder);
+        Worker yesterdayWorker = table.get(workingDate.getBeforeDay());
+        if (todayWorker.equals(yesterdayWorker)) {
+            Worker nextWorker = workers.get(rearrangeOrder(workers, currentOrder + 1));
             result.set(currentOrder, nextWorker);
-            result.set(currentOrder + 1, currentWorker);
+            result.set(rearrangeOrder(workers, currentOrder + 1), todayWorker);
         }
 
         return result;
     }
 
+    private int rearrangeOrder(List<Worker> workers, int index) {
+        return (index + workers.size()) % workers.size();
+    }
+
     public Map<WorkingDate, Worker> getTable() {
         return table;
+    }
+
+    public static void main(String[] args) {
     }
 }
