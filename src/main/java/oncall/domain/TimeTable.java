@@ -33,13 +33,15 @@ public class TimeTable {
             DayOfWeek dayOfWeek = workingCalendar.getDayOfWeek(dayOfMonth);
             WorkingDate workingDate = new WorkingDate(month, dayOfMonth, dayOfWeek);
             if (Date.isWeekday(dayOfWeek)) {
-                List<Worker> workers = changeWorkersIfDuplicate(workingDate, currentWeekdayOrder, weekdayWorkers);
-                table.put(workingDate, workers.get(currentWeekdayOrder));
+                int rearrangedOrder = (currentWeekdayOrder + weekdayWorkers.size()) % weekdayWorkers.size();
+                List<Worker> workers = changeWorkersIfDuplicate(workingDate, rearrangedOrder, weekdayWorkers);
+                table.put(workingDate, workers.get(rearrangedOrder));
                 currentWeekdayOrder++;
             }
             if (Date.isWeekend(dayOfWeek) || Date.isHoliday(workingDate)) {
-                List<Worker> workers = changeWorkersIfDuplicate(workingDate, currentHolidayOrder, holidayWorkers);
-                table.put(workingDate, workers.get(currentHolidayOrder));
+                int rearrangedOrder = (currentHolidayOrder + holidayWorkers.size()) % holidayWorkers.size();
+                List<Worker> workers = changeWorkersIfDuplicate(workingDate, rearrangedOrder, holidayWorkers);
+                table.put(workingDate, workers.get(rearrangedOrder));
                 currentHolidayOrder++;
             }
         }
