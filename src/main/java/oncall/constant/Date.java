@@ -80,12 +80,4 @@ public final class Date {
     public static String getDayOfWeekKorean(DayOfWeek dayOfWeek) {
         return dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.KOREAN);
     }
-
-    public static void main(String[] args) {
-        int startindex = getDayOfWeekIndex("금");
-        for (int i = 1; i <= 31; i++) {
-            DayOfWeek dayOfWeek = getDayOfWeekFromIndex(startindex + i);
-            System.out.println(dayOfWeek);
-        }
-    }
 }

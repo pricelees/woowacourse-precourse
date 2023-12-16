@@ -71,7 +71,4 @@ public class TimeTable {
     public Map<WorkingDate, Worker> getTable() {
         return table;
     }
-
-    public static void main(String[] args) {
-    }
 }
