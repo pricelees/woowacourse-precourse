@@ -1,6 +1,6 @@
 package oncall.view.input;
 
-import oncall.config.ErrorMessage;
+import oncall.constant.ErrorMessage;
 
 public final class ConsoleInputValidator {
     private static final String NAMES_INPUT_REGEX = "([가-힣]+)(,([가-힣]+))*";

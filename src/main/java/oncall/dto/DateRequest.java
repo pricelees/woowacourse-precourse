@@ -1,6 +1,6 @@
 package oncall.dto;
 
-import oncall.config.ErrorMessage;
+import oncall.constant.ErrorMessage;
 
 public record DateRequest(int month, String dayOfWeek) {
     private static final String ALL_DAYOFWEEK = "월화수목금토일";

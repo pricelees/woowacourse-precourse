@@ -3,7 +3,7 @@ package oncall.dto;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import oncall.config.ErrorMessage;
+import oncall.constant.ErrorMessage;
 
 public record WorkerNamesRequests(WorkerNamesRequest weekdayWorkers, WorkerNamesRequest holidayWorkers) {
     public record WorkerNamesRequest(List<String> workerNames) {
