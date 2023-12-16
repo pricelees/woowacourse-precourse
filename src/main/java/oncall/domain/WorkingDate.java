@@ -16,7 +16,7 @@ public class WorkingDate {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public WorkingDate getBeforeDay() {
+    public WorkingDate getYesterday() {
         if (dayOfMonth == 1) {
             return this;
         }

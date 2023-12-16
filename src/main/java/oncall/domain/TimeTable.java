@@ -54,7 +54,7 @@ public class TimeTable {
     private List<Worker> changeWorkersIfDuplicate(WorkingDate workingDate, int currentOrder, List<Worker> workers) {
         List<Worker> result = new ArrayList<>(workers);
         Worker todayWorker = workers.get(currentOrder);
-        Worker yesterdayWorker = table.get(workingDate.getBeforeDay());
+        Worker yesterdayWorker = table.get(workingDate.getYesterday());
         if (todayWorker.equals(yesterdayWorker)) {
             Worker nextWorker = workers.get(rearrangeOrder(workers, currentOrder + 1));
             result.set(currentOrder, nextWorker);
